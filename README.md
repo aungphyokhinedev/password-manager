@@ -1,4 +1,4 @@
-# Vault — Secure Notes
+# Cipher Boy — Secure Notes
 
 A beautiful, client-side encrypted vault for storing passwords, notes, and sensitive data. All encryption happens locally in your browser — your data never leaves your device.
 
