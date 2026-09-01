@@ -51,12 +51,12 @@ export async function unlockVault(masterPassword: string): Promise<boolean> {
 
 export async function getPageList(
   masterPassword: string,
-): Promise<{ id: string; title: string; updatedAt: number }[]> {
+): Promise<{ id: string; title: string; updatedAt: number; passwordProtected: boolean }[]> {
   const meta = await getVaultMeta()
   if (!meta) return []
 
   const pages = await getAllPages()
-  const results: { id: string; title: string; updatedAt: number }[] = []
+  const results: { id: string; title: string; updatedAt: number; passwordProtected: boolean }[] = []
 
   for (const page of pages) {
     try {
@@ -66,9 +66,19 @@ export async function getPageList(
         meta.salt,
         page.titleIv,
       )
-      results.push({ id: page.id, title, updatedAt: page.updatedAt })
+      results.push({
+        id: page.id,
+        title,
+        updatedAt: page.updatedAt,
+        passwordProtected: page.passwordProtected !== false,
+      })
     } catch {
-      results.push({ id: page.id, title: '[Unable to decrypt title]', updatedAt: page.updatedAt })
+      results.push({
+        id: page.id,
+        title: '[Unable to decrypt title]',
+        updatedAt: page.updatedAt,
+        passwordProtected: page.passwordProtected !== false,
+      })
     }
   }
 
@@ -86,6 +96,7 @@ export async function createPage(
 
   const id = generateId()
   const now = Date.now()
+  const passwordProtected = pagePassword.length > 0
 
   const { ciphertext, iv, salt } = await encrypt(content, pagePassword)
   const { ciphertext: encryptedTitle, iv: titleIv } = await encryptWithMasterKey(
@@ -101,6 +112,7 @@ export async function createPage(
     salt,
     iv,
     ciphertext,
+    passwordProtected,
     createdAt: now,
     updatedAt: now,
   }
@@ -120,6 +132,7 @@ export async function decryptPage(
   const page = await getPage(pageId)
   if (!page) throw new Error('Page not found')
 
+  const passwordProtected = page.passwordProtected !== false
   const title = await decryptWithMasterKey(
     page.encryptedTitle,
     masterPassword,
@@ -134,7 +147,8 @@ export async function decryptPage(
     content,
     createdAt: page.createdAt,
     updatedAt: page.updatedAt,
-    pagePassword,
+    pagePassword: passwordProtected ? pagePassword : '',
+    passwordProtected,
   }
 }
 
@@ -152,8 +166,10 @@ export async function updatePage(
   const existing = await getPage(pageId)
   if (!existing) throw new Error('Page not found')
 
-  const passwordToUse = newPagePassword ?? pagePassword
-  const saltToUse = newPagePassword ? undefined : existing.salt
+  const isPasswordChange = newPagePassword !== undefined
+  const passwordToUse = isPasswordChange ? newPagePassword : pagePassword
+  const passwordProtected = passwordToUse.length > 0
+  const saltToUse = isPasswordChange ? undefined : existing.salt
 
   const { ciphertext, iv, salt } = await encrypt(content, passwordToUse, saltToUse)
   const { ciphertext: encryptedTitle, iv: titleIv } = await encryptWithMasterKey(
@@ -169,6 +185,7 @@ export async function updatePage(
     salt,
     iv,
     ciphertext,
+    passwordProtected,
     createdAt: existing.createdAt,
     updatedAt: Date.now(),
   }

@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import type { ErrorCode } from '../i18n/translations'
 import type { DecryptedPage } from '../lib/types'
 import {
   createPage,
@@ -28,15 +29,15 @@ interface VaultContextValue {
   isInitialized: boolean | null
   isUnlocked: boolean
   masterPassword: string | null
-  pages: { id: string; title: string; updatedAt: number }[]
+  pages: { id: string; title: string; updatedAt: number; passwordProtected: boolean }[]
   activePage: DecryptedPage | null
-  error: string | null
+  error: ErrorCode | null
   loading: boolean
   setupVault: (password: string) => Promise<void>
   unlock: (password: string) => Promise<boolean>
   lock: () => void
   refreshPages: () => Promise<void>
-  openPage: (pageId: string, pagePassword: string) => Promise<void>
+  openPage: (pageId: string, pagePassword: string) => Promise<boolean>
   closePage: () => void
   addPage: (title: string, content: string, pagePassword: string) => Promise<void>
   savePage: (
@@ -44,7 +45,7 @@ interface VaultContextValue {
     content: string,
     pagePassword: string,
     newPagePassword?: string,
-  ) => Promise<void>
+  ) => Promise<boolean>
   deletePage: (pageId: string) => Promise<void>
   doExport: () => Promise<void>
   doImport: (file: File, replace: boolean) => Promise<void>
@@ -58,9 +59,9 @@ export function VaultProvider({ children }: { children: ReactNode }) {
   const [isInitialized, setIsInitialized] = useState<boolean | null>(null)
   const [isUnlocked, setIsUnlocked] = useState(false)
   const [masterPassword, setMasterPassword] = useState<string | null>(null)
-  const [pages, setPages] = useState<{ id: string; title: string; updatedAt: number }[]>([])
+  const [pages, setPages] = useState<{ id: string; title: string; updatedAt: number; passwordProtected: boolean }[]>([])
   const [activePage, setActivePage] = useState<DecryptedPage | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorCode | null>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -83,7 +84,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       setIsUnlocked(true)
       setPages([])
     } catch {
-      setError('Failed to create vault')
+      setError('failedCreateVault')
     } finally {
       setLoading(false)
     }
@@ -95,7 +96,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     try {
       const valid = await unlockVault(password)
       if (!valid) {
-        setError('Incorrect master password')
+        setError('incorrectMaster')
         return false
       }
       setMasterPassword(password)
@@ -104,7 +105,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       setPages(list)
       return true
     } catch {
-      setError('Failed to unlock vault')
+      setError('failedUnlock')
       return false
     } finally {
       setLoading(false)
@@ -120,14 +121,16 @@ export function VaultProvider({ children }: { children: ReactNode }) {
 
   const openPage = useCallback(
     async (pageId: string, pagePassword: string) => {
-      if (!masterPassword) return
+      if (!masterPassword) return false
       setLoading(true)
       setError(null)
       try {
         const page = await decryptPage(pageId, pagePassword, masterPassword)
         setActivePage(page)
+        return true
       } catch {
-        setError('Incorrect page password or corrupted data')
+        setError('incorrectPagePassword')
+        return false
       } finally {
         setLoading(false)
       }
@@ -148,7 +151,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
         await createPage(masterPassword, title, content, pagePassword)
         await refreshPages()
       } catch {
-        setError('Failed to create page')
+        setError('failedCreatePage')
       } finally {
         setLoading(false)
       }
@@ -163,7 +166,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       pagePassword: string,
       newPagePassword?: string,
     ) => {
-      if (!masterPassword || !activePage) return
+      if (!masterPassword || !activePage) return false
       setLoading(true)
       setError(null)
       try {
@@ -175,17 +178,20 @@ export function VaultProvider({ children }: { children: ReactNode }) {
           pagePassword,
           newPagePassword,
         )
-        const updatedPassword = newPagePassword ?? pagePassword
+        const updatedPassword = newPagePassword !== undefined ? newPagePassword : pagePassword
         setActivePage({
           ...activePage,
           title,
           content,
           pagePassword: updatedPassword,
+          passwordProtected: updatedPassword.length > 0,
           updatedAt: Date.now(),
         })
         await refreshPages()
+        return true
       } catch {
-        setError('Failed to save page')
+        setError('failedSavePage')
+        return false
       } finally {
         setLoading(false)
       }
@@ -204,7 +210,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
         }
         await refreshPages()
       } catch {
-        setError('Failed to delete page')
+        setError('failedDeletePage')
       } finally {
         setLoading(false)
       }
@@ -219,7 +225,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       const data = await exportVault()
       downloadExport(data)
     } catch {
-      setError('Failed to export vault')
+      setError('failedExport')
     } finally {
       setLoading(false)
     }
@@ -241,8 +247,8 @@ export function VaultProvider({ children }: { children: ReactNode }) {
             lock()
           }
         }
-      } catch (e) {
-        setError(e instanceof Error ? e.message : 'Failed to import vault')
+      } catch {
+        setError('failedImport')
       } finally {
         setLoading(false)
       }
@@ -257,7 +263,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       lock()
       setIsInitialized(false)
     } catch {
-      setError('Failed to reset vault')
+      setError('failedReset')
     } finally {
       setLoading(false)
     }

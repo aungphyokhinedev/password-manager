@@ -14,6 +14,7 @@ export interface EncryptedPage {
   salt: string
   iv: string
   ciphertext: string
+  passwordProtected?: boolean
   createdAt: number
   updatedAt: number
 }
@@ -35,4 +36,5 @@ export interface PageContent {
 
 export interface DecryptedPage extends PageContent {
   pagePassword: string
+  passwordProtected: boolean
 }

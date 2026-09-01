@@ -1,6 +1,13 @@
 import { useState, type FormEvent } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 import { useVault } from '../context/VaultContext'
-import { Button, Input, Modal, PasswordInput, Textarea } from './ui'
+import {
+  parsePageContent,
+  serializePageContent,
+  type PageContentData,
+} from '../lib/pageContent'
+import { Button, Input, Modal, PasswordInput } from './ui'
+import { ContentEditor } from './ContentEditor'
 
 interface NewPageModalProps {
   open: boolean
@@ -9,15 +16,16 @@ interface NewPageModalProps {
 
 export function NewPageModal({ open, onClose }: NewPageModalProps) {
   const { addPage, loading } = useVault()
+  const { t } = useLanguage()
   const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [contentData, setContentData] = useState<PageContentData>({ type: 'text', text: '' })
   const [pagePassword, setPagePassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
 
   function reset() {
     setTitle('')
-    setContent('')
+    setContentData({ type: 'text', text: '' })
     setPagePassword('')
     setConfirmPassword('')
     setError(null)
@@ -33,69 +41,69 @@ export function NewPageModal({ open, onClose }: NewPageModalProps) {
     setError(null)
 
     if (!title.trim()) {
-      setError('Please enter a page title')
-      return
-    }
-    if (!pagePassword.trim()) {
-      setError('Please set a page password')
-      return
-    }
-    if (pagePassword.length < 4) {
-      setError('Page password must be at least 4 characters')
-      return
-    }
-    if (pagePassword !== confirmPassword) {
-      setError('Page passwords do not match')
+      setError(t.page.enterPageTitle)
       return
     }
 
-    await addPage(title.trim(), content, pagePassword)
+    const trimmedPassword = pagePassword.trim()
+    if (trimmedPassword) {
+      if (trimmedPassword.length < 4) {
+        setError(t.page.pagePasswordMin)
+        return
+      }
+      if (trimmedPassword !== confirmPassword) {
+        setError(t.page.passwordsNoMatch)
+        return
+      }
+    }
+
+    await addPage(title.trim(), serializePageContent(contentData), trimmedPassword)
     reset()
     onClose()
   }
 
   return (
-    <Modal open={open} onClose={handleClose} title="New Secure Page">
+    <Modal open={open} onClose={handleClose} title={t.page.newPage}>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         <Input
-          label="Page Title"
+          label={t.page.pageTitle}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="e.g. Bank Accounts, Work Passwords"
+          placeholder={t.page.pageTitlePlaceholder}
           autoFocus
         />
 
-        <Textarea
-          label="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="Enter your passwords, notes, or any sensitive data..."
-          className="min-h-[150px]"
+        <ContentEditor
+          value={contentData}
+          onChange={setContentData}
+          minHeight="min-h-[150px]"
         />
 
         <PasswordInput
-          label="Page Password"
-          hint="Each page has its own password. Required for new pages."
+          label={t.page.pagePasswordOptional}
+          hint={t.page.pagePasswordHint}
           value={pagePassword}
           onChange={setPagePassword}
-          placeholder="Set a unique page password"
+          placeholder={t.page.setPagePassword}
         />
 
-        <PasswordInput
-          label="Confirm Page Password"
-          value={confirmPassword}
-          onChange={setConfirmPassword}
-          placeholder="Confirm page password"
-        />
+        {pagePassword.trim() && (
+          <PasswordInput
+            label={t.page.confirmPagePassword}
+            value={confirmPassword}
+            onChange={setConfirmPassword}
+            placeholder={t.page.confirmPagePassword}
+          />
+        )}
 
         <div className="flex gap-3 pt-2">
           <Button type="button" variant="secondary" className="flex-1" onClick={handleClose}>
-            Cancel
+            {t.common.cancel}
           </Button>
           <Button type="submit" className="flex-1" disabled={loading}>
-            {loading ? 'Creating...' : 'Create Page'}
+            {loading ? t.page.creating : t.page.createPage}
           </Button>
         </div>
       </form>
@@ -109,71 +117,72 @@ interface PageEditorProps {
 
 export function PageEditor({ onBack }: PageEditorProps) {
   const { activePage, savePage, loading } = useVault()
+  const { t } = useLanguage()
   const [title, setTitle] = useState(activePage?.title ?? '')
-  const [content, setContent] = useState(activePage?.content ?? '')
+  const [contentData, setContentData] = useState<PageContentData>(() =>
+    parsePageContent(activePage?.content ?? ''),
+  )
   const [showChangePassword, setShowChangePassword] = useState(false)
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
-  const [saved, setSaved] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   if (!activePage) return null
 
   const pagePassword = activePage.pagePassword
+  const isPasswordProtected = activePage.passwordProtected
 
   async function handleSave(e: FormEvent) {
     e.preventDefault()
     setError(null)
-    setSaved(false)
+
+    const serialized = serializePageContent(contentData)
 
     if (showChangePassword) {
-      if (!newPassword.trim()) {
-        setError('Please enter a new password')
+      if (newPassword.trim()) {
+        if (newPassword !== confirmNewPassword) {
+          setError(t.page.passwordsNoMatch)
+          return
+        }
+        if (newPassword.length < 4) {
+          setError(t.page.pagePasswordMin)
+          return
+        }
+        const success = await savePage(title, serialized, pagePassword, newPassword)
+        if (success) onBack()
         return
       }
-      if (newPassword !== confirmNewPassword) {
-        setError('New passwords do not match')
+
+      if (isPasswordProtected) {
+        const success = await savePage(title, serialized, pagePassword, '')
+        if (success) onBack()
         return
       }
-      await savePage(title, content, pagePassword, newPassword)
-    } else {
-      await savePage(title, content, pagePassword)
     }
 
-    setSaved(true)
-    setShowChangePassword(false)
-    setNewPassword('')
-    setConfirmNewPassword('')
-    setTimeout(() => setSaved(false), 2000)
+    const success = await savePage(title, serialized, pagePassword)
+    if (success) onBack()
   }
 
   return (
     <div className="flex-1 flex flex-col animate-fade-in">
       <div className="flex items-center gap-4 mb-6">
         <Button variant="ghost" size="sm" onClick={onBack}>
-          ← Back
+          {t.common.back}
         </Button>
         <div className="flex-1" />
-        {saved && (
-          <span className="text-sm text-emerald-400 animate-fade-in">Saved securely</span>
-        )}
       </div>
 
       <form onSubmit={handleSave} className="flex-1 flex flex-col space-y-4">
         {error && <p className="text-sm text-red-400">{error}</p>}
 
         <Input
-          label="Title"
+          label={t.page.title}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <Textarea
-          label="Content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          className="flex-1 min-h-[400px]"
-        />
+        <ContentEditor value={contentData} onChange={setContentData} />
 
         <div className="border-t border-vault-700/50 pt-4">
           <button
@@ -181,30 +190,43 @@ export function PageEditor({ onBack }: PageEditorProps) {
             onClick={() => setShowChangePassword(!showChangePassword)}
             className="text-sm text-vault-400 hover:text-vault-300 transition-colors"
           >
-            {showChangePassword ? '− Keep current page password' : '+ Change page password (optional)'}
+            {showChangePassword
+              ? t.page.keepCurrentPassword
+              : isPasswordProtected
+                ? t.page.changeOrRemovePassword
+                : t.page.addPagePassword}
           </button>
 
           {showChangePassword && (
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <PasswordInput
-                label="New Page Password"
-                value={newPassword}
-                onChange={setNewPassword}
-                placeholder="Enter new password"
-              />
-              <PasswordInput
-                label="Confirm New Password"
-                value={confirmNewPassword}
-                onChange={setConfirmNewPassword}
-                placeholder="Confirm new password"
-              />
+            <div className="mt-4 space-y-4">
+              <p className="text-xs text-slate-500">
+                {isPasswordProtected
+                  ? t.page.passwordChangeHintProtected
+                  : t.page.passwordChangeHintUnprotected}
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <PasswordInput
+                  label={isPasswordProtected ? t.page.newPagePassword : t.page.pagePassword}
+                  value={newPassword}
+                  onChange={setNewPassword}
+                  placeholder={isPasswordProtected ? t.page.newPasswordOrBlank : t.page.setPagePassword}
+                />
+                {newPassword.trim() && (
+                  <PasswordInput
+                    label={t.page.confirmPagePassword}
+                    value={confirmNewPassword}
+                    onChange={setConfirmNewPassword}
+                    placeholder={t.page.confirmPagePassword}
+                  />
+                )}
+              </div>
             </div>
           )}
         </div>
 
         <div className="flex gap-3 pt-2">
           <Button type="submit" disabled={loading}>
-            {loading ? 'Saving...' : 'Save Page'}
+            {loading ? t.page.saving : t.page.savePage}
           </Button>
         </div>
       </form>

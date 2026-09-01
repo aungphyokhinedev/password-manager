@@ -1,3 +1,4 @@
+import { LanguageProvider } from './context/LanguageContext'
 import { VaultProvider, useVault } from './context/VaultContext'
 import { Dashboard } from './components/Dashboard'
 import { UnlockScreen } from './components/UnlockScreen'
@@ -22,8 +23,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <VaultProvider>
-      <AppContent />
-    </VaultProvider>
+    <LanguageProvider>
+      <VaultProvider>
+        <AppContent />
+      </VaultProvider>
+    </LanguageProvider>
   )
 }

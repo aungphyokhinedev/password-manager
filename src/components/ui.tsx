@@ -1,4 +1,5 @@
 import { useState, type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react'
+import { useLanguage } from '../context/LanguageContext'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'danger'
@@ -147,13 +148,17 @@ export function Modal({
   onClose,
   title,
   children,
+  size = 'md',
 }: {
   open: boolean
   onClose: () => void
   title: string
   children: ReactNode
+  size?: 'md' | 'lg'
 }) {
   if (!open) return null
+
+  const sizeClass = size === 'lg' ? 'max-w-lg' : 'max-w-md'
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -161,18 +166,29 @@ export function Modal({
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
       />
-      <div className="relative w-full max-w-md animate-fade-in">
+      <div className={`relative w-full ${sizeClass} animate-fade-in`}>
         <Card className="p-6">
-          <div className="flex items-center justify-between mb-5">
-            <h2 className="text-lg font-semibold text-white">{title}</h2>
+          {title && (
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-lg font-semibold text-white">{title}</h2>
+              <button
+                onClick={onClose}
+                className="text-slate-400 hover:text-white transition-colors p-1"
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+          )}
+          {!title && (
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white transition-colors p-1"
+              className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors p-1 z-10"
               aria-label="Close"
             >
               ✕
             </button>
-          </div>
+          )}
           {children}
         </Card>
       </div>
@@ -196,6 +212,7 @@ export function PasswordInput({
   autoFocus?: boolean
 }) {
   const [show, setShow] = useState(false)
+  const { t } = useLanguage()
 
   return (
     <div className="space-y-1.5">
@@ -214,7 +231,7 @@ export function PasswordInput({
           onClick={() => setShow(!show)}
           className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 text-sm"
         >
-          {show ? 'Hide' : 'Show'}
+          {show ? t.common.hide : t.common.show}
         </button>
       </div>
       {hint && <p className="text-xs text-slate-500">{hint}</p>}
@@ -242,6 +259,20 @@ export function IconLock() {
         strokeLinejoin="round"
         d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
       />
+    </svg>
+  )
+}
+
+export function IconOpenDoor() {
+  return (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" d="M4 3v18" />
+      <path strokeLinecap="round" d="M4 21h16" />
+      <path strokeLinecap="round" d="M20 3v18" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M7 4v17" />
+      <path strokeLinecap="round" d="M7 4l9 3" />
+      <path strokeLinecap="round" d="M7 21l9-3" />
+      <circle cx="13" cy="12.5" r="0.75" fill="currentColor" stroke="none" />
     </svg>
   )
 }
@@ -278,9 +309,9 @@ export function IconUpload() {
   )
 }
 
-export function IconTrash() {
+export function IconTrash({ className = 'w-4 h-4' }: { className?: string }) {
   return (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
