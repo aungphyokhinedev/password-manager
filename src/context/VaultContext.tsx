@@ -33,6 +33,7 @@ interface VaultContextValue {
   activePage: DecryptedPage | null
   error: ErrorCode | null
   loading: boolean
+  dataRevision: number
   setupVault: (password: string) => Promise<void>
   unlock: (password: string) => Promise<boolean>
   lock: () => void
@@ -63,6 +64,11 @@ export function VaultProvider({ children }: { children: ReactNode }) {
   const [activePage, setActivePage] = useState<DecryptedPage | null>(null)
   const [error, setError] = useState<ErrorCode | null>(null)
   const [loading, setLoading] = useState(false)
+  const [dataRevision, setDataRevision] = useState(0)
+
+  const bumpDataRevision = useCallback(() => {
+    setDataRevision((n) => n + 1)
+  }, [])
 
   useEffect(() => {
     vaultExists().then(setIsInitialized)
@@ -150,13 +156,14 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       try {
         await createPage(masterPassword, title, content, pagePassword)
         await refreshPages()
+        bumpDataRevision()
       } catch {
         setError('failedCreatePage')
       } finally {
         setLoading(false)
       }
     },
-    [masterPassword, refreshPages],
+    [masterPassword, refreshPages, bumpDataRevision],
   )
 
   const savePage = useCallback(
@@ -188,6 +195,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
           updatedAt: Date.now(),
         })
         await refreshPages()
+        bumpDataRevision()
         return true
       } catch {
         setError('failedSavePage')
@@ -196,7 +204,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
         setLoading(false)
       }
     },
-    [masterPassword, activePage, refreshPages],
+    [masterPassword, activePage, refreshPages, bumpDataRevision],
   )
 
   const deletePageFn = useCallback(
@@ -209,13 +217,14 @@ export function VaultProvider({ children }: { children: ReactNode }) {
           setActivePage(null)
         }
         await refreshPages()
+        bumpDataRevision()
       } catch {
         setError('failedDeletePage')
       } finally {
         setLoading(false)
       }
     },
-    [activePage, refreshPages],
+    [activePage, refreshPages, bumpDataRevision],
   )
 
   const doExport = useCallback(async () => {
@@ -243,6 +252,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
           const valid = await unlockVault(masterPassword)
           if (valid) {
             await refreshPages()
+            bumpDataRevision()
           } else {
             lock()
           }
@@ -253,7 +263,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
         setLoading(false)
       }
     },
-    [masterPassword, refreshPages, lock],
+    [masterPassword, refreshPages, lock, bumpDataRevision],
   )
 
   const destroyVault = useCallback(async () => {
@@ -280,6 +290,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       activePage,
       error,
       loading,
+      dataRevision,
       setupVault,
       unlock,
       lock,
@@ -302,6 +313,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
       activePage,
       error,
       loading,
+      dataRevision,
       setupVault,
       unlock,
       lock,

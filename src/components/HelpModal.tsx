@@ -23,6 +23,30 @@ export function HelpModal({ open, onClose }: HelpModalProps) {
             <p className="text-slate-400 text-sm leading-relaxed">{step.body}</p>
           </div>
         ))}
+
+        <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-4">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="shrink-0 text-indigo-400 mt-0.5">
+              <IconShield />
+            </div>
+            <div>
+              <h3 className="font-semibold text-white text-sm mb-1">
+                {t.help.dataProtection.title}
+              </h3>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                {t.help.dataProtection.intro}
+              </p>
+            </div>
+          </div>
+          <ul className="space-y-3 ml-9">
+            {t.help.dataProtection.points.map((point, i) => (
+              <li key={i} className="text-sm">
+                <span className="font-medium text-indigo-200/90">{point.title}</span>
+                <span className="text-slate-400"> — {point.body}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div className="mt-5 flex items-start gap-3 rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">

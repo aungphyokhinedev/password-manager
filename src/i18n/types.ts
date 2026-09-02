@@ -20,6 +20,8 @@ export interface Translations {
     language: string
     pleaseWait: string
     close: string
+    readMore: string
+    readLess: string
   }
   unlock: {
     setupSubtitle: string
@@ -54,6 +56,15 @@ export interface Translations {
     exportVault: string
     importMerge: string
     resetVault: string
+    dataWarning: {
+      title: string
+      masterPassword: string
+      exportBackup: string
+      exportSaveLocation: string
+      exportEncrypted: string
+      localOnly: string
+      otherBrowser: string
+    }
   }
   page: {
     newPage: string
@@ -118,6 +129,11 @@ export interface Translations {
     title: string
     subtitle: string
     steps: HelpStep[]
+    dataProtection: {
+      title: string
+      intro: string
+      points: HelpStep[]
+    }
     securityNote: string
   }
   language: {

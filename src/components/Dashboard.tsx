@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext'
 import { useVault } from '../context/VaultContext'
 import { useVaultError } from '../hooks/useVaultError'
+import { DataWarningBanner } from './DataWarningBanner'
 import { HelpModal } from './HelpModal'
 import { LanguageModal } from './LanguageModal'
 import {
@@ -48,6 +49,7 @@ export function Dashboard() {
     doExport,
     doImport,
     loading,
+    dataRevision,
     clearError,
   } = useVault()
   const vaultError = useVaultError()
@@ -134,14 +136,11 @@ export function Dashboard() {
 
       <Modal open={showSettings} onClose={() => setShowSettings(false)} title={t.common.settings}>
         <div className="space-y-3">
-          <Button variant="secondary" className="w-full justify-start" onClick={() => { setShowSettings(false); setShowHelp(true) }}>
-            ?
-            {t.common.help}
-          </Button>
-          <Button variant="secondary" className="w-full justify-start" onClick={() => { setShowSettings(false); setShowLanguage(true) }}>
-            🌐
-            {t.common.language}
-          </Button>
+          <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-3 mb-1">
+            <p className="text-slate-400 text-xs leading-relaxed">{t.dashboard.dataWarning.exportSaveLocation}</p>
+            <p className="text-indigo-200/80 text-xs leading-relaxed mt-2">{t.dashboard.dataWarning.exportEncrypted}</p>
+          </div>
+
           <Button variant="secondary" className="w-full justify-start" onClick={doExport}>
             <IconDownload />
             {t.dashboard.exportVault}
@@ -196,6 +195,7 @@ export function Dashboard() {
           onLock={lock}
           onSettings={() => setShowSettings(true)}
           onHelp={() => setShowHelp(true)}
+          onLanguage={() => setShowLanguage(true)}
         />
         <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-6">
           <PageEditor onBack={handleClosePage} />
@@ -211,6 +211,7 @@ export function Dashboard() {
         onLock={lock}
         onSettings={() => setShowSettings(true)}
         onHelp={() => setShowHelp(true)}
+        onLanguage={() => setShowLanguage(true)}
       />
 
       <main className="flex-1 max-w-4xl mx-auto w-full px-4 py-8">
@@ -246,7 +247,13 @@ export function Dashboard() {
             </Button>
           </Card>
         ) : (
-          <div className="grid gap-3">
+          <>
+            <DataWarningBanner
+              onExport={doExport}
+              loading={loading}
+              dataRevision={dataRevision}
+            />
+            <div className="grid gap-3">
             {pages.map((page, i) => (
               <Card
                 key={page.id}
@@ -285,7 +292,8 @@ export function Dashboard() {
                 </button>
               </Card>
             ))}
-          </div>
+            </div>
+          </>
         )}
       </main>
 
@@ -298,10 +306,12 @@ function Header({
   onLock,
   onSettings,
   onHelp,
+  onLanguage,
 }: {
   onLock: () => void
   onSettings: () => void
   onHelp: () => void
+  onLanguage: () => void
 }) {
   const { t } = useLanguage()
 
@@ -314,9 +324,12 @@ function Header({
           </div>
           <span className="font-semibold text-white">{t.appName}</span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
           <Button variant="ghost" size="sm" onClick={onHelp}>
             {t.common.help}
+          </Button>
+          <Button variant="ghost" size="sm" onClick={onLanguage}>
+            {t.common.language}
           </Button>
           <Button variant="ghost" size="sm" onClick={onSettings}>
             {t.common.settings}

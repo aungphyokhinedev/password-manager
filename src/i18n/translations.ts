@@ -15,6 +15,8 @@ const en: Translations = {
     language: 'Language',
     pleaseWait: 'Please wait...',
     close: 'Close',
+    readMore: 'Read more',
+    readLess: 'Show less',
   },
   unlock: {
     setupSubtitle: 'Create your master password to secure your data',
@@ -49,6 +51,15 @@ const en: Translations = {
     exportVault: 'Export Cipher Boy Backup',
     importMerge: 'Import & Merge Backup',
     resetVault: 'Reset Cipher Boy (Delete All Data)',
+    dataWarning: {
+      title: 'Important — protect your data',
+      masterPassword: 'Save your master password in a safe place. If you forget it, your data cannot be recovered.',
+      exportBackup: 'Export your data regularly. If the browser clears site data by accident, everything stored here will be lost.',
+      exportSaveLocation: 'After exporting, save the backup file to a safe place you can access later — an external drive, cloud storage, or another secure location. You will need this file to recover your data.',
+      exportEncrypted: 'The backup file contains encrypted data only. It is safe to store elsewhere — no one can read your passwords without your master password.',
+      localOnly: 'Your data is stored only in this browser\'s local database (IndexedDB). It is not synced to the cloud or other devices.',
+      otherBrowser: 'To use Cipher Boy on another browser or device, export a backup file from here, then import it there and enter your master password.',
+    },
   },
   page: {
     newPage: 'New Secure Page',
@@ -131,13 +142,39 @@ const en: Translations = {
       },
       {
         title: '5. Back up your data',
-        body: 'Go to Settings → Export Cipher Boy Backup to download a JSON file. Store it safely. Use Import to restore or merge data on another device or after reinstalling.',
+        body: 'Go to Settings → Export Cipher Boy Backup to download a JSON file. Save it to a safe place you can access later. The file is fully encrypted — safe to store on cloud or external drive. Use Import to restore on another device.',
       },
       {
         title: '6. Table tips',
         body: 'In Table mode, name your columns (up to 5), add rows, and use "Copy column" to copy all values in a column. Hover a cell to copy a single value.',
       },
     ],
+    dataProtection: {
+      title: 'How your data is protected',
+      intro: 'All sensitive content is encrypted in your browser before it is saved. Your passwords are never stored in plain text.',
+      points: [
+        {
+          title: 'Where it is stored',
+          body: 'Data lives in this browser\'s local database (IndexedDB). It stays on your device and is not synced to the cloud.',
+        },
+        {
+          title: 'What is encrypted',
+          body: 'Page content is encrypted with AES-256-GCM using the page password. Page titles are encrypted with your master password.',
+        },
+        {
+          title: 'What is never stored',
+          body: 'Your master password and page passwords exist only in memory while Cipher Boy is unlocked. They are never written to disk.',
+        },
+        {
+          title: 'How keys are derived',
+          body: 'Passwords are stretched with PBKDF2 (600,000 iterations, SHA-256) via the Web Crypto API before encryption.',
+        },
+        {
+          title: 'Backups',
+          body: 'Exported JSON files contain the same encrypted data as the browser. Save the file somewhere safe for later use — it stays secure without your master password. Import on another device to restore.',
+        },
+      ],
+    },
     securityNote: 'Remember: if you forget your master password or a page password, your data cannot be recovered. There is no backdoor.',
   },
   language: {
@@ -178,6 +215,8 @@ const my: Translations = {
     language: 'ဘာသာစကား',
     pleaseWait: 'ခဏစောင့်ပါ...',
     close: 'ပိတ်မည်',
+    readMore: 'ပိုမိုဖတ်ရန်',
+    readLess: 'လျှော့ပြရန်',
   },
   unlock: {
     setupSubtitle: 'သင့်ဒေတာကို လုံခြုံစေရန် မာစတာစကားဝှက် ဖန်တီးပါ',
@@ -212,6 +251,15 @@ const my: Translations = {
     exportVault: 'Cipher Boy Backup ထုတ်ယူမည်',
     importMerge: 'Backup တင်သွင်း/ပေါင်းမည်',
     resetVault: 'Cipher Boy ပြန်လည်သတ်မှတ်မည် (ဒေတာအားလုံး ဖျက်မည်)',
+    dataWarning: {
+      title: 'အရေးကြီး — သင့်ဒေတာကို ကာကွယ်ပါ',
+      masterPassword: 'မာစတာစကားဝှက်ကို လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။ မေ့ပါက ဒေတာကို ပြန်ရယူ၍ မရပါ။',
+      exportBackup: 'ဒေတာကို ပုံမှန် backup ထုတ်ယူပါ။ ဘရောက်ဇာက site data ကို accidentally ရှင်းလိုက်ပါက ဤနေရာရှိ ဒေတာအားလုံး ဆုံးရှုံးပါမည်။',
+      exportSaveLocation: 'Backup ထုတ်ပြီးနောက် ဖိုင်ကို နောက်မှ သုံးနိုင်မည့် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ — ပြင်ပဒရိုင်း၊ cloud storage သို့မဟုတ် အခြားလုံခြုံသောနေရာ။ ဒေတာပြန်ရယူရန် ဤဖိုင် လိုအပ်ပါမည်။',
+      exportEncrypted: 'Backup ဖိုင်တွင် ကုဒ်ဝှက်ထားသော ဒေတာသာ ပါဝင်သည်။ အခြားနေရာတွင် သိမ်းဆည်းရန် လုံခြုံသည် — မာစတာစကားဝှက်မရှိဘဲ သင့်စကားဝှက်များကို မဖတ်နိုင်ပါ။',
+      localOnly: 'ဒေတာကို ဤဘရောက်ဇာရှိ local database (IndexedDB) တွင်သာ သိမ်းသည်။ cloud သို့မဟုတ် အခြားကိရိယာများသို့ sync မဖြစ်ပါ။',
+      otherBrowser: 'အခြားဘရောက်ဇာ/ကိရိယာတွင် Cipher Boy သုံးရန် ဤနေရာမှ backup ထုတ်ယူပြီး ထိုနေရာတွင် import လုပ်ကာ မာစတာစကားဝှက် ထည့်ပါ။',
+    },
   },
   page: {
     newPage: 'လုံခြုံသော စာမျက်နှာအသစ်',
@@ -294,13 +342,39 @@ const my: Translations = {
       },
       {
         title: '၅။ ဒေတာ backup ယူပါ',
-        body: 'ဆက်တင်များ → Cipher Boy Backup ထုတ်ယူမည် သို့ သွားပြီး JSON ဖိုင် ထုတ်ယူပါ။ လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။ Import ဖြင့် ပြန်ယူနိုင်သည်။',
+        body: 'ဆက်တင်များ → Cipher Boy Backup ထုတ်ယူမည် သို့ သွားပြီး JSON ဖိုင် ထုတ်ယူပါ။ နောက်မှ သုံးနိုင်မည့် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။ ဖိုင်သည် ကုဒ်ဝှက်ထားပြီး cloud သို့မဟုတ် ပြင်ပဒရိုင်းတွင် သိမ်းရန် လုံခြုံသည်။ Import ဖြင့် ပြန်ယူနိုင်သည်။',
       },
       {
         title: '၆။ ဇယား အကြံပြုချက်များ',
         body: 'ဇယားမုဒ်တွင် ကော်လံအမည်များ (အများဆုံး ၅) သတ်မှတ်ပြီး အတန်းများ ထည့်ပါ။ "ကော်လံ ကူးမည်" ဖြင့် ကော်လံတစ်ခုလုံး ကူးနိုင်သည်။',
       },
     ],
+    dataProtection: {
+      title: 'သင့်ဒေတာကို ဘယ်လို ကာကွယ်ထားသလဲ',
+      intro: 'အရေးကြီးအကြောင်းအရာအားလုံးကို သိမ်းမီ ဘရောက်ဇာတွင် ကုဒ်ဝှက်သည်။ စကားဝှက်များကို plain text အဖြစ် မသိမ်းပါ။',
+      points: [
+        {
+          title: 'သိမ်းဆည်းရာ',
+          body: 'ဒေတာကို ဤဘရောက်ဇာရှိ local database (IndexedDB) တွင် သိမ်းသည်။ cloud သို့ sync မဖြစ်ပါ။',
+        },
+        {
+          title: 'ကုဒ်ဝှက်ထားသော အရာများ',
+          body: 'စာမျက်နှာအကြောင်းအရာကို စာမျက်နှာစကားဝှက်ဖြင့် AES-256-GCM ဖြင့် ကုဒ်ဝှက်သည်။ ခေါင်းစဉ်များကို မာစတာစကားဝှက်ဖြင့် ကုဒ်ဝှက်သည်။',
+        },
+        {
+          title: 'မသိမ်းသော အရာများ',
+          body: 'မာစတာစကားဝှက်နှင့် စာမျက်နှာစကားဝှက်များကို ဖွင့်ထားစဉ် memory တွင်သာ ရှိသည်။ disk သို့ မရေးပါ။',
+        },
+        {
+          title: 'ကီးထုတ်ယူမှု',
+          body: 'Web Crypto API ဖြင့် PBKDF2 (600,000 iterations, SHA-256) သုံးပြီး စကားဝှက်များကို stretch လုပ်ကာ ကုဒ်ဝှက်သည်။',
+        },
+        {
+          title: 'Backup',
+          body: 'ထုတ်ယူသော JSON ဖိုင်များတွင် ဘရောက်ဇာနှင့် တူညီသော ကုဒ်ဝှက်ထားသော ဒေတာများ ပါဝင်သည်။ နောက်မှ သုံးရန် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ — မာစတာစကားဝှက်မရှိဘဲ လုံခြုံသည်။ import လုပ်ပြီး ပြန်ယူနိုင်သည်။',
+        },
+      ],
+    },
     securityNote: 'သတိပြုပါ: မာစတာစကားဝှက် သို့မဟုတ် စာမျက်နှာစကားဝှက် မေ့ပါက ဒေတာကို ပြန်ရယူ၍ မရပါ။',
   },
   language: {
@@ -341,6 +415,8 @@ const zh: Translations = {
     language: '语言',
     pleaseWait: '请稍候...',
     close: '关闭',
+    readMore: '阅读更多',
+    readLess: '收起',
   },
   unlock: {
     setupSubtitle: '创建主密码以保护您的数据',
@@ -375,6 +451,15 @@ const zh: Translations = {
     exportVault: '导出 Cipher Boy 备份',
     importMerge: '导入并合并备份',
     resetVault: '重置 Cipher Boy（删除所有数据）',
+    dataWarning: {
+      title: '重要 — 保护您的数据',
+      masterPassword: '请将主密码保存在安全的地方。一旦忘记，数据将无法恢复。',
+      exportBackup: '请定期导出数据。若浏览器意外清除网站数据，此处存储的所有内容都将丢失。',
+      exportSaveLocation: '导出后，请将备份文件保存到日后可访问的安全位置——外置硬盘、云存储或其他安全场所。恢复数据时需要此文件。',
+      exportEncrypted: '备份文件仅包含加密数据，可安全存放在其他位置——没有主密码，任何人都无法读取您的密码。',
+      localOnly: '您的数据仅保存在本浏览器的本地数据库（IndexedDB）中，不会同步到云端或其他设备。',
+      otherBrowser: '要在其他浏览器或设备上使用 Cipher Boy，请从此处导出备份文件，然后在目标设备导入并输入主密码。',
+    },
   },
   page: {
     newPage: '新建安全页面',
@@ -457,13 +542,39 @@ const zh: Translations = {
       },
       {
         title: '5. 备份数据',
-        body: '进入设置 → 导出 Cipher Boy 备份，下载 JSON 文件并妥善保存。可通过导入在其他设备或重装后恢复。',
+        body: '进入设置 → 导出 Cipher Boy 备份，下载 JSON 文件并保存到日后可访问的安全位置。文件已完全加密，可安全存放在云端或外置硬盘。通过导入可在其他设备恢复。',
       },
       {
         title: '6. 表格技巧',
         body: '表格模式下可自定义列名（最多5列）、添加行，使用"复制列"复制整列数据，悬停单元格可复制单个值。',
       },
     ],
+    dataProtection: {
+      title: '数据如何受到保护',
+      intro: '所有敏感内容在保存前会在浏览器中加密。密码绝不会以明文形式存储。',
+      points: [
+        {
+          title: '存储位置',
+          body: '数据保存在本浏览器的本地数据库（IndexedDB）中，仅在本设备上，不会同步到云端。',
+        },
+        {
+          title: '加密内容',
+          body: '页面内容使用页面密码以 AES-256-GCM 加密。页面标题使用主密码加密。',
+        },
+        {
+          title: '永不存储',
+          body: '主密码和页面密码仅在 Cipher Boy 解锁时存在于内存中，不会写入磁盘。',
+        },
+        {
+          title: '密钥派生',
+          body: '通过 Web Crypto API 使用 PBKDF2（600,000 次迭代，SHA-256）对密码进行拉伸后再加密。',
+        },
+        {
+          title: '备份',
+          body: '导出的 JSON 文件包含与浏览器相同的加密数据。请将文件保存到安全位置以备日后使用——没有主密码仍然安全。在其他设备导入即可恢复。',
+        },
+      ],
+    },
     securityNote: '请注意：如果忘记主密码或页面密码，数据将无法恢复。没有后门。',
   },
   language: {
@@ -504,6 +615,8 @@ const ja: Translations = {
     language: '言語',
     pleaseWait: 'お待ちください...',
     close: '閉じる',
+    readMore: 'もっと見る',
+    readLess: '閉じる',
   },
   unlock: {
     setupSubtitle: 'データを保護するマスターパスワードを作成してください',
@@ -538,6 +651,15 @@ const ja: Translations = {
     exportVault: 'Cipher Boy のバックアップをエクスポート',
     importMerge: 'バックアップをインポート・統合',
     resetVault: 'Cipher Boy をリセット（全データ削除）',
+    dataWarning: {
+      title: '重要 — データを保護してください',
+      masterPassword: 'マスターパスワードを安全な場所に保管してください。忘れた場合、データは復元できません。',
+      exportBackup: '定期的にデータをエクスポートしてください。ブラウザがサイトデータを誤って削除すると、ここに保存されたすべてが失われます。',
+      exportSaveLocation: 'エクスポート後、バックアップファイルを後で使える安全な場所に保存してください — 外付けドライブ、クラウド、など。データ復元にはこのファイルが必要です。',
+      exportEncrypted: 'バックアップファイルには暗号化されたデータのみが含まれます。他の場所に保存しても安全です — マスターパスワードがなければ誰も読めません。',
+      localOnly: 'データはこのブラウザのローカルデータベース（IndexedDB）にのみ保存されます。クラウドや他のデバイスには同期されません。',
+      otherBrowser: '別のブラウザやデバイスで Cipher Boy を使うには、ここからバックアップをエクスポートし、そちらでインポートしてマスターパスワードを入力してください。',
+    },
   },
   page: {
     newPage: '新しいセキュアページ',
@@ -620,13 +742,39 @@ const ja: Translations = {
       },
       {
         title: '5. データをバックアップ',
-        body: '設定 → Cipher Boy のバックアップをエクスポートでJSONファイルをダウンロードし、安全に保管します。インポートで別デバイスや再インストール後に復元できます。',
+        body: '設定 → Cipher Boy のバックアップをエクスポートでJSONファイルをダウンロードし、後で使える安全な場所に保存してください。ファイルは完全に暗号化されており、クラウドや外付けドライブに保存しても安全です。インポートで別デバイスに復元できます。',
       },
       {
         title: '6. テーブルのヒント',
         body: 'テーブルモードでは列名（最大5列）を設定し、行を追加できます。「列をコピー」で列全体をコピー、セルにホバーで個別コピーができます。',
       },
     ],
+    dataProtection: {
+      title: 'データの保護方法',
+      intro: '機密コンテンツはすべて保存前にブラウザ内で暗号化されます。パスワードは平文では保存されません。',
+      points: [
+        {
+          title: '保存場所',
+          body: 'データはこのブラウザのローカルデータベース（IndexedDB）に保存されます。クラウドには同期されません。',
+        },
+        {
+          title: '暗号化されるもの',
+          body: 'ページ内容はページパスワードで AES-256-GCM 暗号化されます。ページタイトルはマスターパスワードで暗号化されます。',
+        },
+        {
+          title: '保存されないもの',
+          body: 'マスターパスワードとページパスワードは、Cipher Boy のロック解除中のみメモリに存在し、ディスクには書き込まれません。',
+        },
+        {
+          title: '鍵の導出',
+          body: 'Web Crypto API 経由で PBKDF2（600,000 回、SHA-256）によりパスワードをストレッチしてから暗号化します。',
+        },
+        {
+          title: 'バックアップ',
+          body: 'エクスポートした JSON ファイルにはブラウザと同じ暗号化データが含まれます。後で使うために安全な場所に保存してください — マスターパスワードなしでも安全です。別デバイスでインポートして復元できます。',
+        },
+      ],
+    },
     securityNote: '注意：マスターパスワードやページパスワードを忘れた場合、データは復元できません。バックドアはありません。',
   },
   language: {
@@ -667,6 +815,8 @@ const ko: Translations = {
     language: '언어',
     pleaseWait: '잠시 기다려 주세요...',
     close: '닫기',
+    readMore: '더 보기',
+    readLess: '접기',
   },
   unlock: {
     setupSubtitle: '데이터를 보호할 마스터 비밀번호를 만드세요',
@@ -701,6 +851,15 @@ const ko: Translations = {
     exportVault: 'Cipher Boy 백업보내기',
     importMerge: '백업 가져오기 및 병합',
     resetVault: 'Cipher Boy 초기화 (모든 데이터 삭제)',
+    dataWarning: {
+      title: '중요 — 데이터를 보호하세요',
+      masterPassword: '마스터 비밀번호를 안전한 곳에 보관하세요. 잊어버리면 데이터를 복구할 수 없습니다.',
+      exportBackup: '정기적으로 데이터를 내보내세요. 브라우저가 사이트 데이터를 실수로 삭제하면 여기 저장된 모든 내용이 사라집니다.',
+      exportSaveLocation: '내보낸 후 백업 파일을 나중에 사용할 수 있는 안전한 곳에 저장하세요 — 외장 드라이브, 클라우드 등. 데이터 복구에 이 파일이 필요합니다.',
+      exportEncrypted: '백업 파일에는 암호화된 데이터만 포함됩니다. 다른 곳에 저장해도 안전합니다 — 마스터 비밀번호 없이는 아무도 비밀번호를 읽을 수 없습니다.',
+      localOnly: '데이터는 이 브라우저의 로컬 데이터베이스(IndexedDB)에만 저장됩니다. 클라우드나 다른 기기와 동기화되지 않습니다.',
+      otherBrowser: '다른 브라우저나 기기에서 Cipher Boy를 사용하려면 여기서 백업 파일을 내보낸 뒤, 해당 기기에서 가져오기하고 마스터 비밀번호를 입력하세요.',
+    },
   },
   page: {
     newPage: '새 보안 페이지',
@@ -783,13 +942,39 @@ const ko: Translations = {
       },
       {
         title: '5. 데이터 백업',
-        body: '설정 → Cipher Boy 백업보내기에서 JSON 파일을 다운로드하고 안전하게 보관하세요. 가져오기로 다른 기기나 재설치 후 복원할 수 있습니다.',
+        body: '설정 → Cipher Boy 백업보내기에서 JSON 파일을 다운로드하고 나중에 사용할 수 있는 안전한 곳에 저장하세요. 파일은 완전히 암호화되어 클라우드나 외장 드라이브에 저장해도 안전합니다. 가져오기로 다른 기기에서 복원할 수 있습니다.',
       },
       {
         title: '6. 표 사용 팁',
         body: '표 모드에서 열 이름(최대 5개)을 설정하고 행을 추가할 수 있습니다. "열 복사"로 열 전체를 복사하고, 셀에 마우스를 올려 개별 값을 복사할 수 있습니다.',
       },
     ],
+    dataProtection: {
+      title: '데이터 보호 방법',
+      intro: '모든 민감한 내용은 저장 전 브라우저에서 암호화됩니다. 비밀번호는 평문으로 저장되지 않습니다.',
+      points: [
+        {
+          title: '저장 위치',
+          body: '데이터는 이 브라우저의 로컬 데이터베이스(IndexedDB)에 저장됩니다. 클라우드와 동기화되지 않습니다.',
+        },
+        {
+          title: '암호화되는 항목',
+          body: '페이지 내용은 페이지 비밀번호로 AES-256-GCM 암호화됩니다. 페이지 제목은 마스터 비밀번호로 암호화됩니다.',
+        },
+        {
+          title: '저장되지 않는 항목',
+          body: '마스터 비밀번호와 페이지 비밀번호는 Cipher Boy가 잠금 해제된 동안 메모리에만 존재하며 디스크에 기록되지 않습니다.',
+        },
+        {
+          title: '키 파생',
+          body: 'Web Crypto API를 통해 PBKDF2(600,000회 반복, SHA-256)로 비밀번호를 늘린 후 암호화합니다.',
+        },
+        {
+          title: '백업',
+          body: '내보낸 JSON 파일에는 브라우저와 동일한 암호화 데이터가 포함됩니다. 나중에 사용할 수 있도록 안전한 곳에 저장하세요 — 마스터 비밀번호 없이도 안전합니다. 다른 기기에서 가져와 복원할 수 있습니다.',
+        },
+      ],
+    },
     securityNote: '참고: 마스터 비밀번호나 페이지 비밀번호를 잊으면 데이터를 복구할 수 없습니다. 백도어는 없습니다.',
   },
   language: {
