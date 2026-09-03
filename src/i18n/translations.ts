@@ -97,8 +97,7 @@ const en: Translations = {
     text: 'Text',
     table: 'Table',
     textPlaceholder: 'Enter your passwords, notes, or any sensitive data...',
-    copyColumn: 'Copy column',
-    copied: 'Copied!',
+    doubleClickCopy: 'Double-click a cell to copy',
     addRow: '+ Add row',
     addColumn: '+ Add column',
     removeLastColumn: '− Remove last column',
@@ -146,7 +145,7 @@ const en: Translations = {
       },
       {
         title: '6. Table tips',
-        body: 'In Table mode, name your columns (up to 5), add rows, and use "Copy column" to copy all values in a column. Hover a cell to copy a single value.',
+        body: 'In Table mode, name your columns (up to 5) and add rows. Double-click any cell to copy its value.',
       },
     ],
     dataProtection: {
@@ -173,6 +172,10 @@ const en: Translations = {
           title: 'Backups',
           body: 'Exported JSON files contain the same encrypted data as the browser. Save the file somewhere safe for later use — it stays secure without your master password. Import on another device to restore.',
         },
+        {
+          title: 'Install as an app (PWA)',
+          body: 'You can install Cipher Boy on your home screen. Encryption and IndexedDB storage work the same — only the app interface is cached for offline use, never your passwords.',
+        },
       ],
     },
     securityNote: 'Remember: if you forget your master password or a page password, your data cannot be recovered. There is no backdoor.',
@@ -197,6 +200,18 @@ const en: Translations = {
     failedExport: 'Failed to export Cipher Boy',
     failedImport: 'Failed to import Cipher Boy',
     failedReset: 'Failed to reset Cipher Boy',
+  },
+  browserWarning: {
+    inApp: {
+      title: 'In-app browser detected — data may be lost',
+      body: 'You are opening Cipher Boy inside {browser} (or another in-app browser). These browsers often clear saved data when you close the app, so your encrypted vault can disappear without warning.',
+      recommend: 'Open this page in Chrome, Safari, or Firefox instead. Export a backup first if you already saved data here.',
+    },
+    unrecommended: {
+      title: 'Use a trusted browser for safer storage',
+      body: 'This browser ({browser}) may not keep local data reliably. Cipher Boy stores your vault only in this browser.',
+      recommend: 'For best results, use Chrome, Safari, Firefox, Edge, or another well-known browser — not an in-app or embedded browser.',
+    },
   },
 }
 
@@ -297,8 +312,7 @@ const my: Translations = {
     text: 'စာသား',
     table: 'ဇယား',
     textPlaceholder: 'စကားဝှက်များ၊ မှတ်စုများ သို့မဟုတ် အရေးကြီးဒေတာ ထည့်ပါ...',
-    copyColumn: 'ကော်လံ ကူးမည်',
-    copied: 'ကူးပြီး!',
+    doubleClickCopy: 'ဆဲလ်ကို နှစ်ချက်နှိပ်၍ ကူးယူပါ',
     addRow: '+ အတန်း ထည့်မည်',
     addColumn: '+ ကော်လံ ထည့်မည်',
     removeLastColumn: '− နောက်ဆုံးကော်လံ ဖယ်မည်',
@@ -346,7 +360,7 @@ const my: Translations = {
       },
       {
         title: '၆။ ဇယား အကြံပြုချက်များ',
-        body: 'ဇယားမုဒ်တွင် ကော်လံအမည်များ (အများဆုံး ၅) သတ်မှတ်ပြီး အတန်းများ ထည့်ပါ။ "ကော်လံ ကူးမည်" ဖြင့် ကော်လံတစ်ခုလုံး ကူးနိုင်သည်။',
+        body: 'ဇယားမုဒ်တွင် ကော်လံအမည်များ (အများဆုံး ၅) သတ်မှတ်ပြီး အတန်းများ ထည့်ပါ။ ဆဲလ်တစ်ခုကို နှစ်ချက်နှိပ်၍ တန်ဖိုးကို ကူးယူနိုင်သည်။',
       },
     ],
     dataProtection: {
@@ -373,6 +387,10 @@ const my: Translations = {
           title: 'Backup',
           body: 'ထုတ်ယူသော JSON ဖိုင်များတွင် ဘရောက်ဇာနှင့် တူညီသော ကုဒ်ဝှက်ထားသော ဒေတာများ ပါဝင်သည်။ နောက်မှ သုံးရန် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ — မာစတာစကားဝှက်မရှိဘဲ လုံခြုံသည်။ import လုပ်ပြီး ပြန်ယူနိုင်သည်။',
         },
+        {
+          title: 'App အဖြစ် ထည့်သွင်းခြင်း (PWA)',
+          body: 'Cipher Boy ကို home screen သို့ ထည့်သွင်းနိုင်သည်။ ကုဒ်ဝှက်ခြင်းနှင့် IndexedDB သိမ်းဆည်းမှု အတူတူပင် — app UI ကိုသာ offline အတွက် cache လုပ်သည်၊ စကားဝှက်များကို မဟုတ်ပါ။',
+        },
       ],
     },
     securityNote: 'သတိပြုပါ: မာစတာစကားဝှက် သို့မဟုတ် စာမျက်နှာစကားဝှက် မေ့ပါက ဒေတာကို ပြန်ရယူ၍ မရပါ။',
@@ -397,6 +415,18 @@ const my: Translations = {
     failedExport: 'Cipher Boy ထုတ်ယူ၍ မရပါ',
     failedImport: 'Cipher Boy တင်သွင်း၍ မရပါ',
     failedReset: 'Cipher Boy ပြန်လည်သတ်မှတ်၍ မရပါ',
+  },
+  browserWarning: {
+    inApp: {
+      title: 'In-app browser တွေ့ရှိသည် — ဒေတာ ပျောက်နိုင်သည်',
+      body: 'Cipher Boy ကို {browser} (သို့မဟုတ် အခြား in-app browser) အတွင်း ဖွင့်ထားသည်။ ဤ browser များသည် app ပိတ်လိုက်သောအခါ သိမ်းထားသော ဒေတာကို မကြာခဏ ရှင်းလင်းတတ်သည်။',
+      recommend: 'Chrome, Safari သို့မဟုတ် Firefox တွင် ဖွင့်ပါ။ ဤနေရာတွင် ဒေတာ သိမ်းပြီးသားဆိုရင် အရင် backup ထုတ်ယူပါ။',
+    },
+    unrecommended: {
+      title: 'ယုံကြည်ရသော browser သုံးပါ',
+      body: 'ဤ browser ({browser}) သည် local data ကို ယုံကြည်စိတ်ချစွာ မသိမ်းနိုင်ပါ။ Cipher Boy သည် ဤ browser တွင်သာ ဒေတာ သိမ်းသည်။',
+      recommend: 'Chrome, Safari, Firefox, Edge သို့မဟုတ် လူသိများသော browser သုံးပါ — in-app browser မသုံးပါနှင့်။',
+    },
   },
 }
 
@@ -497,8 +527,7 @@ const zh: Translations = {
     text: '文本',
     table: '表格',
     textPlaceholder: '输入您的密码、笔记或任何敏感数据...',
-    copyColumn: '复制列',
-    copied: '已复制！',
+    doubleClickCopy: '双击单元格即可复制',
     addRow: '+ 添加行',
     addColumn: '+ 添加列',
     removeLastColumn: '− 移除最后一列',
@@ -546,7 +575,7 @@ const zh: Translations = {
       },
       {
         title: '6. 表格技巧',
-        body: '表格模式下可自定义列名（最多5列）、添加行，使用"复制列"复制整列数据，悬停单元格可复制单个值。',
+        body: '表格模式下可自定义列名（最多5列）并添加行。双击任意单元格即可复制其内容。',
       },
     ],
     dataProtection: {
@@ -573,6 +602,10 @@ const zh: Translations = {
           title: '备份',
           body: '导出的 JSON 文件包含与浏览器相同的加密数据。请将文件保存到安全位置以备日后使用——没有主密码仍然安全。在其他设备导入即可恢复。',
         },
+        {
+          title: '安装为应用（PWA）',
+          body: '可将 Cipher Boy 添加到主屏幕。加密与 IndexedDB 存储方式不变——仅缓存应用界面供离线使用，不会缓存您的密码。',
+        },
       ],
     },
     securityNote: '请注意：如果忘记主密码或页面密码，数据将无法恢复。没有后门。',
@@ -597,6 +630,18 @@ const zh: Translations = {
     failedExport: '导出 Cipher Boy 失败',
     failedImport: '导入 Cipher Boy 失败',
     failedReset: '重置 Cipher Boy 失败',
+  },
+  browserWarning: {
+    inApp: {
+      title: '检测到应用内浏览器 — 数据可能丢失',
+      body: '您正在 {browser}（或其他应用内浏览器）中打开 Cipher Boy。这类浏览器在关闭应用时经常清除网站数据，加密保险库可能无预警消失。',
+      recommend: '请改用 Chrome、Safari 或 Firefox 打开此页面。如果已在此保存数据，请先导出备份。',
+    },
+    unrecommended: {
+      title: '请使用可信浏览器以更安全地存储',
+      body: '当前浏览器（{browser}）可能无法可靠保存本地数据。Cipher Boy 仅将数据保存在本浏览器中。',
+      recommend: '建议使用 Chrome、Safari、Firefox、Edge 或其他知名浏览器，避免应用内或嵌入式浏览器。',
+    },
   },
 }
 
@@ -697,8 +742,7 @@ const ja: Translations = {
     text: 'テキスト',
     table: 'テーブル',
     textPlaceholder: 'パスワード、メモ、機密データを入力...',
-    copyColumn: '列をコピー',
-    copied: 'コピーしました！',
+    doubleClickCopy: 'セルをダブルクリックでコピー',
     addRow: '+ 行を追加',
     addColumn: '+ 列を追加',
     removeLastColumn: '− 最後の列を削除',
@@ -746,7 +790,7 @@ const ja: Translations = {
       },
       {
         title: '6. テーブルのヒント',
-        body: 'テーブルモードでは列名（最大5列）を設定し、行を追加できます。「列をコピー」で列全体をコピー、セルにホバーで個別コピーができます。',
+        body: 'テーブルモードでは列名（最大5列）を設定し、行を追加できます。セルをダブルクリックすると値をコピーできます。',
       },
     ],
     dataProtection: {
@@ -773,6 +817,10 @@ const ja: Translations = {
           title: 'バックアップ',
           body: 'エクスポートした JSON ファイルにはブラウザと同じ暗号化データが含まれます。後で使うために安全な場所に保存してください — マスターパスワードなしでも安全です。別デバイスでインポートして復元できます。',
         },
+        {
+          title: 'アプリとしてインストール（PWA）',
+          body: 'Cipher Boy をホーム画面に追加できます。暗号化と IndexedDB の保存は同じです — オフライン用にアプリ画面のみをキャッシュし、パスワードはキャッシュしません。',
+        },
       ],
     },
     securityNote: '注意：マスターパスワードやページパスワードを忘れた場合、データは復元できません。バックドアはありません。',
@@ -797,6 +845,18 @@ const ja: Translations = {
     failedExport: 'Cipher Boy のエクスポートに失敗しました',
     failedImport: 'Cipher Boy のインポートに失敗しました',
     failedReset: 'Cipher Boy のリセットに失敗しました',
+  },
+  browserWarning: {
+    inApp: {
+      title: 'アプリ内ブラウザを検出 — データが消える可能性があります',
+      body: '{browser}（または別のアプリ内ブラウザ）内で Cipher Boy を開いています。これらのブラウザはアプリを閉じるとサイトデータを消すことが多く、保管庫が突然失われることがあります。',
+      recommend: 'Chrome、Safari、または Firefox でこのページを開いてください。すでにデータを保存している場合は、先にバックアップをエクスポートしてください。',
+    },
+    unrecommended: {
+      title: '安全な保存のため信頼できるブラウザを使ってください',
+      body: 'このブラウザ（{browser}）はローカルデータを確実に保持できない可能性があります。Cipher Boy はこのブラウザにのみデータを保存します。',
+      recommend: 'Chrome、Safari、Firefox、Edge など信頼性の高いブラウザを使い、アプリ内・埋め込みブラウザは避けてください。',
+    },
   },
 }
 
@@ -897,8 +957,7 @@ const ko: Translations = {
     text: '텍스트',
     table: '표',
     textPlaceholder: '비밀번호, 메모 또는 민감한 데이터를 입력하세요...',
-    copyColumn: '열 복사',
-    copied: '복사됨!',
+    doubleClickCopy: '셀을 더블클릭하여 복사',
     addRow: '+ 행 추가',
     addColumn: '+ 열 추가',
     removeLastColumn: '− 마지막 열 제거',
@@ -946,7 +1005,7 @@ const ko: Translations = {
       },
       {
         title: '6. 표 사용 팁',
-        body: '표 모드에서 열 이름(최대 5개)을 설정하고 행을 추가할 수 있습니다. "열 복사"로 열 전체를 복사하고, 셀에 마우스를 올려 개별 값을 복사할 수 있습니다.',
+        body: '표 모드에서 열 이름(최대 5개)을 설정하고 행을 추가할 수 있습니다. 셀을 더블클릭하면 값을 복사할 수 있습니다.',
       },
     ],
     dataProtection: {
@@ -973,6 +1032,10 @@ const ko: Translations = {
           title: '백업',
           body: '내보낸 JSON 파일에는 브라우저와 동일한 암호화 데이터가 포함됩니다. 나중에 사용할 수 있도록 안전한 곳에 저장하세요 — 마스터 비밀번호 없이도 안전합니다. 다른 기기에서 가져와 복원할 수 있습니다.',
         },
+        {
+          title: '앱으로 설치 (PWA)',
+          body: 'Cipher Boy를 홈 화면에 추가할 수 있습니다. 암호화와 IndexedDB 저장 방식은 동일합니다 — 오프라인용으로 앱 화면만 캐시하며, 비밀번호는 캐시하지 않습니다.',
+        },
       ],
     },
     securityNote: '참고: 마스터 비밀번호나 페이지 비밀번호를 잊으면 데이터를 복구할 수 없습니다. 백도어는 없습니다.',
@@ -997,6 +1060,18 @@ const ko: Translations = {
     failedExport: 'Cipher Boy보내기에 실패했습니다',
     failedImport: 'Cipher Boy 가져오기에 실패했습니다',
     failedReset: 'Cipher Boy 초기화에 실패했습니다',
+  },
+  browserWarning: {
+    inApp: {
+      title: '인앱 브라우저 감지 — 데이터가 사라질 수 있습니다',
+      body: '{browser}(또는 다른 인앱 브라우저)에서 Cipher Boy를 열고 있습니다. 이런 브라우저는 앱을 닫을 때 사이트 데이터를 자주 지우므로, 암호화된 보관함이 예고 없이 사라질 수 있습니다.',
+      recommend: 'Chrome, Safari 또는 Firefox에서 이 페이지를 여세요. 이미 데이터를 저장했다면 먼저 백업을보내세요.',
+    },
+    unrecommended: {
+      title: '안전한 저장을 위해 신뢰할 수 있는 브라우저를 사용하세요',
+      body: '현재 브라우저({browser})는 로컬 데이터를 안정적으로 유지하지 못할 수 있습니다. Cipher Boy는 이 브라우저에만 데이터를 저장합니다.',
+      recommend: 'Chrome, Safari, Firefox, Edge 등 잘 알려진 브라우저를 사용하고, 인앱/임베디드 브라우저는 피하세요.',
+    },
   },
 }
 

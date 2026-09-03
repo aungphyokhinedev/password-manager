@@ -102,8 +102,7 @@ export interface Translations {
     text: string
     table: string
     textPlaceholder: string
-    copyColumn: string
-    copied: string
+    doubleClickCopy: string
     addRow: string
     addColumn: string
     removeLastColumn: string
@@ -156,6 +155,18 @@ export interface Translations {
     failedExport: string
     failedImport: string
     failedReset: string
+  }
+  browserWarning: {
+    inApp: {
+      title: string
+      body: string
+      recommend: string
+    }
+    unrecommended: {
+      title: string
+      body: string
+      recommend: string
+    }
   }
 }
 

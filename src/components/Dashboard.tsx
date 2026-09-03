@@ -10,9 +10,12 @@ import {
   Button,
   Card,
   IconDownload,
+  IconHelp,
+  IconLanguage,
   IconLock,
   IconOpenDoor,
   IconPlus,
+  IconSettings,
   IconShield,
   IconTrash,
   IconUpload,
@@ -190,7 +193,7 @@ export function Dashboard() {
 
   if (activePage) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="h-full min-h-full flex flex-col">
         <Header
           onLock={lock}
           onSettings={() => setShowSettings(true)}
@@ -206,7 +209,7 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-full min-h-full flex flex-col">
       <Header
         onLock={lock}
         onSettings={() => setShowSettings(true)}
@@ -324,18 +327,46 @@ function Header({
           </div>
           <span className="font-semibold text-white">{t.appName}</span>
         </div>
-        <div className="flex items-center gap-1 sm:gap-2">
-          <Button variant="ghost" size="sm" onClick={onHelp}>
-            {t.common.help}
+        <div className="flex items-center gap-0.5 sm:gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="!px-2.5"
+            onClick={onSettings}
+            aria-label={t.common.settings}
+            title={t.common.settings}
+          >
+            <IconSettings />
           </Button>
-          <Button variant="ghost" size="sm" onClick={onLanguage}>
-            {t.common.language}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="!px-2.5"
+            onClick={onHelp}
+            aria-label={t.common.help}
+            title={t.common.help}
+          >
+            <IconHelp />
           </Button>
-          <Button variant="ghost" size="sm" onClick={onSettings}>
-            {t.common.settings}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="!px-2.5"
+            onClick={onLanguage}
+            aria-label={t.common.language}
+            title={t.common.language}
+          >
+            <IconLanguage />
           </Button>
-          <Button variant="secondary" size="sm" onClick={onLock}>
-            {t.common.lock}
+          <Button
+            variant="secondary"
+            size="sm"
+            className="!px-2.5"
+            onClick={onLock}
+            aria-label={t.common.lock}
+            title={t.common.lock}
+          >
+            <IconLock />
           </Button>
         </div>
       </div>

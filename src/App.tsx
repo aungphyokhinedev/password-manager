@@ -1,6 +1,7 @@
 import { LanguageProvider } from './context/LanguageContext'
 import { VaultProvider, useVault } from './context/VaultContext'
 import { Dashboard } from './components/Dashboard'
+import { InsecureBrowserBanner } from './components/InsecureBrowserBanner'
 import { UnlockScreen } from './components/UnlockScreen'
 
 function AppContent() {
@@ -14,11 +15,14 @@ function AppContent() {
     )
   }
 
-  if (!isUnlocked) {
-    return <UnlockScreen />
-  }
-
-  return <Dashboard />
+  return (
+    <div className="h-dvh min-h-screen flex flex-col overflow-hidden">
+      <InsecureBrowserBanner />
+      <div className="flex-1 min-h-0 flex flex-col overflow-y-auto">
+        {isUnlocked ? <Dashboard /> : <UnlockScreen />}
+      </div>
+    </div>
+  )
 }
 
 export default function App() {
