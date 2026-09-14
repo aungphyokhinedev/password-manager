@@ -3,7 +3,7 @@ import { useLanguage } from '../context/LanguageContext'
 import { useVault } from '../context/VaultContext'
 import { useVaultError } from '../hooks/useVaultError'
 import { HelpModal } from './HelpModal'
-import { HeaderInstallButton, InstallAppPrompt } from './InstallAppPrompt'
+import { HeaderInstallButton } from './InstallAppPrompt'
 import { LanguageModal } from './LanguageModal'
 import {
   Alert,
@@ -139,8 +139,6 @@ export function UnlockScreen() {
             </div>
           )}
         </Card>
-
-        <InstallAppPrompt variant="card" />
 
         <p className="text-center text-xs text-slate-600 mt-6">
           {t.unlock.localEncryptionNote}
