@@ -168,6 +168,20 @@ export interface Translations {
       recommend: string
     }
   }
+  installApp: {
+    title: string
+    subtitle: string
+    installButton: string
+    shortLabel: string
+    notNow: string
+    alreadyInstalled: string
+    iosHint: string
+    iosStep1: string
+    iosStep2: string
+    iosStep3: string
+    manualBody: string
+    blockedBody: string
+  }
 }
 
 export const languageLabels: Record<Language, string> = {

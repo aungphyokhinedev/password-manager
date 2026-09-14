@@ -2,6 +2,7 @@ import { LanguageProvider } from './context/LanguageContext'
 import { VaultProvider, useVault } from './context/VaultContext'
 import { Dashboard } from './components/Dashboard'
 import { InsecureBrowserBanner } from './components/InsecureBrowserBanner'
+import { InstallAppPrompt } from './components/InstallAppPrompt'
 import { UnlockScreen } from './components/UnlockScreen'
 
 function AppContent() {
@@ -18,6 +19,7 @@ function AppContent() {
   return (
     <div className="h-dvh min-h-screen flex flex-col overflow-hidden">
       <InsecureBrowserBanner />
+      <InstallAppPrompt variant="banner" />
       <div className="flex-1 min-h-0 flex flex-col overflow-y-auto">
         {isUnlocked ? <Dashboard /> : <UnlockScreen />}
       </div>

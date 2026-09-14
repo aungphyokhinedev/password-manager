@@ -4,6 +4,7 @@ import { useVault } from '../context/VaultContext'
 import { useVaultError } from '../hooks/useVaultError'
 import { DataWarningBanner } from './DataWarningBanner'
 import { HelpModal } from './HelpModal'
+import { InstallAppPrompt, HeaderInstallButton } from './InstallAppPrompt'
 import { LanguageModal } from './LanguageModal'
 import {
   Alert,
@@ -143,6 +144,8 @@ export function Dashboard() {
             <p className="text-slate-400 text-xs leading-relaxed">{t.dashboard.dataWarning.exportSaveLocation}</p>
             <p className="text-indigo-200/80 text-xs leading-relaxed mt-2">{t.dashboard.dataWarning.exportEncrypted}</p>
           </div>
+
+          <InstallAppPrompt variant="settings" />
 
           <Button variant="secondary" className="w-full justify-start" onClick={doExport}>
             <IconDownload />
@@ -328,6 +331,7 @@ function Header({
           <span className="font-semibold text-white">{t.appName}</span>
         </div>
         <div className="flex items-center gap-0.5 sm:gap-1">
+          <HeaderInstallButton />
           <Button
             variant="ghost"
             size="sm"

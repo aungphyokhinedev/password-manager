@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext'
 import { useVault } from '../context/VaultContext'
 import { useVaultError } from '../hooks/useVaultError'
 import { HelpModal } from './HelpModal'
+import { HeaderInstallButton, InstallAppPrompt } from './InstallAppPrompt'
 import { LanguageModal } from './LanguageModal'
 import {
   Alert,
@@ -65,7 +66,8 @@ export function UnlockScreen() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-vault-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-vault-accent/10 rounded-full blur-3xl" />
 
-      <div className="absolute top-4 right-4 flex gap-2">
+      <div className="absolute top-4 right-4 flex gap-1 z-10">
+        <HeaderInstallButton />
         <Button variant="ghost" size="sm" onClick={() => setShowHelp(true)}>
           {t.common.help}
         </Button>
@@ -137,6 +139,8 @@ export function UnlockScreen() {
             </div>
           )}
         </Card>
+
+        <InstallAppPrompt variant="card" />
 
         <p className="text-center text-xs text-slate-600 mt-6">
           {t.unlock.localEncryptionNote}

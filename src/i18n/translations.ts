@@ -48,7 +48,7 @@ const en: Translations = {
     open: 'Open',
     deletePage: 'Delete Page',
     deletePageDesc: 'This will permanently delete this page and its encrypted data. This action cannot be undone.',
-    exportVault: 'Export Cipher Boy Backup',
+    exportVault: 'Backup data',
     importMerge: 'Import & Merge Backup',
     resetVault: 'Reset Cipher Boy (Delete All Data)',
     dataWarning: {
@@ -110,9 +110,9 @@ const en: Translations = {
     pagesWord: 'encrypted pages',
     backupTitle: 'Back up before you delete',
     backupDesc: 'Export Cipher Boy to a safe place first — an external drive, cloud storage, or password manager. You can restore it later using Import.',
-    exportNow: 'Export Cipher Boy Backup Now',
+    exportNow: 'Backup data now',
     exporting: 'Exporting...',
-    exportAgain: 'Export Again',
+    exportAgain: 'Backup again',
     backupSuccess: 'Backup downloaded successfully. Store it somewhere safe.',
     confirmCheckbox: 'I have exported my data to a safe location, or I understand that all Cipher Boy data will be permanently lost.',
     deleting: 'Deleting...',
@@ -141,7 +141,7 @@ const en: Translations = {
       },
       {
         title: '5. Back up your data',
-        body: 'Go to Settings → Export Cipher Boy Backup to download a JSON file. Save it to a safe place you can access later. The file is fully encrypted — safe to store on cloud or external drive. Use Import to restore on another device.',
+        body: 'Go to Settings → Backup data to download a JSON file. Save it to a safe place you can access later. The file is fully encrypted — safe to store on cloud or external drive. Use Import to restore on another device.',
       },
       {
         title: '6. Table tips',
@@ -213,6 +213,20 @@ const en: Translations = {
       recommend: 'For best results, use Chrome, Safari, Firefox, Edge, or another well-known browser — not an in-app or embedded browser.',
     },
   },
+  installApp: {
+    title: 'Install Cipher Boy',
+    subtitle: 'Add it to your home screen for faster access and more reliable local storage.',
+    installButton: 'Install app',
+    shortLabel: 'Install',
+    notNow: 'Not now',
+    alreadyInstalled: 'Cipher Boy is installed on this device.',
+    iosHint: 'On iPhone or iPad, install from Safari:',
+    iosStep1: 'Tap the Share button',
+    iosStep2: 'Scroll and tap “Add to Home Screen”',
+    iosStep3: 'Tap Add — then open Cipher Boy from your home screen',
+    manualBody: 'Use your browser menu: Install app / Add to Home Screen / Add to Dock.',
+    blockedBody: 'In-app browsers cannot install apps reliably. Open this link in Chrome, Safari, or Firefox, then tap Install.',
+  },
 }
 
 const my: Translations = {
@@ -263,7 +277,7 @@ const my: Translations = {
     open: 'ဖွင့်မည်',
     deletePage: 'စာမျက်နှာ ဖျက်မည်',
     deletePageDesc: 'ဤစာမျက်နှာနှင့် ကုဒ်ဝှက်ထားသော ဒေတာအားလုံးကို အပြီးတိုင် ဖျက်ပါမည်။ ပြန်လည် မရနိုင်ပါ။',
-    exportVault: 'Cipher Boy Backup ထုတ်ယူမည်',
+    exportVault: 'ဒေတာ backup',
     importMerge: 'Backup တင်သွင်း/ပေါင်းမည်',
     resetVault: 'Cipher Boy ပြန်လည်သတ်မှတ်မည် (ဒေတာအားလုံး ဖျက်မည်)',
     dataWarning: {
@@ -325,9 +339,9 @@ const my: Translations = {
     pagesWord: 'ကုဒ်ဝှက်ထားသော စာမျက်နှာများ',
     backupTitle: 'မဖျက်မီ backup ယူပါ',
     backupDesc: 'ဦးစွာ Cipher Boy ကို လုံခြုံသောနေရာသို့ ထုတ်ယူပါ — ပြင်ပဒရိုင်း၊ cloud သို့မဟုတ် password manager။ နောက်မှ Import ဖြင့် ပြန်ယူနိုင်သည်။',
-    exportNow: 'ယခု Cipher Boy Backup ထုတ်ယူမည်',
+    exportNow: 'ယခု ဒေတာ backup',
     exporting: 'ထုတ်ယူနေသည်...',
-    exportAgain: 'ထပ်မံ ထုတ်ယူမည်',
+    exportAgain: 'ထပ်မံ backup',
     backupSuccess: 'Backup အောင်မြင်စွာ ထုတ်ယူပြီး။ လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။',
     confirmCheckbox: 'ကျွန်ုပ်၏ ဒေတာကို လုံခြုံသောနေရာသို့ ထုတ်ယူပြီး သို့မဟုတ် ဒေတာအားလုံး ဆုံးရှုံးမည်ကို နားလည်ပါသည်။',
     deleting: 'ဖျက်နေသည်...',
@@ -356,7 +370,7 @@ const my: Translations = {
       },
       {
         title: '၅။ ဒေတာ backup ယူပါ',
-        body: 'ဆက်တင်များ → Cipher Boy Backup ထုတ်ယူမည် သို့ သွားပြီး JSON ဖိုင် ထုတ်ယူပါ။ နောက်မှ သုံးနိုင်မည့် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။ ဖိုင်သည် ကုဒ်ဝှက်ထားပြီး cloud သို့မဟုတ် ပြင်ပဒရိုင်းတွင် သိမ်းရန် လုံခြုံသည်။ Import ဖြင့် ပြန်ယူနိုင်သည်။',
+        body: 'ဆက်တင်များ → ဒေတာ backup သို့ သွားပြီး JSON ဖိုင် ထုတ်ယူပါ။ နောက်မှ သုံးနိုင်မည့် လုံခြုံသောနေရာတွင် သိမ်းဆည်းပါ။ ဖိုင်သည် ကုဒ်ဝှက်ထားပြီး cloud သို့မဟုတ် ပြင်ပဒရိုင်းတွင် သိမ်းရန် လုံခြုံသည်။ Import ဖြင့် ပြန်ယူနိုင်သည်။',
       },
       {
         title: '၆။ ဇယား အကြံပြုချက်များ',
@@ -428,6 +442,20 @@ const my: Translations = {
       recommend: 'Chrome, Safari, Firefox, Edge သို့မဟုတ် လူသိများသော browser သုံးပါ — in-app browser မသုံးပါနှင့်။',
     },
   },
+  installApp: {
+    title: 'Cipher Boy ထည့်သွင်းမည်',
+    subtitle: 'ပိုမြန်စွာ ဖွင့်ရန်နှင့် local storage ပိုတည်ငြိမ်စေရန် home screen သို့ ထည့်ပါ။',
+    installButton: 'App ထည့်သွင်းမည်',
+    shortLabel: 'ထည့်မည်',
+    notNow: 'နောက်မှ',
+    alreadyInstalled: 'Cipher Boy ကို ဤကိရိယာတွင် ထည့်ပြီးသားဖြစ်သည်။',
+    iosHint: 'iPhone သို့မဟုတ် iPad တွင် Safari မှ ထည့်သွင်းပါ:',
+    iosStep1: 'Share ခလုတ်ကို နှိပ်ပါ',
+    iosStep2: '“Add to Home Screen” ကို ရွေးပါ',
+    iosStep3: 'Add နှိပ်ပြီး home screen မှ Cipher Boy ကို ဖွင့်ပါ',
+    manualBody: 'Browser မီနူးမှ Install app / Add to Home Screen ကို ရွေးပါ။',
+    blockedBody: 'In-app browser တွင် app ထည့်ရန် မတည်ငြိမ်ပါ။ Chrome, Safari သို့မဟုတ် Firefox တွင် ဖွင့်ပြီး Install နှိပ်ပါ။',
+  },
 }
 
 const zh: Translations = {
@@ -478,7 +506,7 @@ const zh: Translations = {
     open: '打开',
     deletePage: '删除页面',
     deletePageDesc: '这将永久删除此页面及其加密数据。此操作无法撤销。',
-    exportVault: '导出 Cipher Boy 备份',
+    exportVault: '备份数据',
     importMerge: '导入并合并备份',
     resetVault: '重置 Cipher Boy（删除所有数据）',
     dataWarning: {
@@ -540,9 +568,9 @@ const zh: Translations = {
     pagesWord: '个加密页面',
     backupTitle: '删除前请备份',
     backupDesc: '请先将 Cipher Boy 导出到安全位置——外置硬盘、云存储或密码管理器。之后可通过导入恢复。',
-    exportNow: '立即导出 Cipher Boy 备份',
+    exportNow: '立即备份数据',
     exporting: '导出中...',
-    exportAgain: '再次导出',
+    exportAgain: '再次备份',
     backupSuccess: '备份下载成功。请将其存放在安全位置。',
     confirmCheckbox: '我已将数据导出到安全位置，或我理解所有 Cipher Boy 数据将永久丢失。',
     deleting: '删除中...',
@@ -571,7 +599,7 @@ const zh: Translations = {
       },
       {
         title: '5. 备份数据',
-        body: '进入设置 → 导出 Cipher Boy 备份，下载 JSON 文件并保存到日后可访问的安全位置。文件已完全加密，可安全存放在云端或外置硬盘。通过导入可在其他设备恢复。',
+        body: '进入设置 → 备份数据，下载 JSON 文件并保存到日后可访问的安全位置。文件已完全加密，可安全存放在云端或外置硬盘。通过导入可在其他设备恢复。',
       },
       {
         title: '6. 表格技巧',
@@ -643,6 +671,20 @@ const zh: Translations = {
       recommend: '建议使用 Chrome、Safari、Firefox、Edge 或其他知名浏览器，避免应用内或嵌入式浏览器。',
     },
   },
+  installApp: {
+    title: '安装 Cipher Boy',
+    subtitle: '添加到主屏幕，打开更快，本地存储也更稳定。',
+    installButton: '安装应用',
+    shortLabel: '安装',
+    notNow: '暂不',
+    alreadyInstalled: 'Cipher Boy 已安装在此设备上。',
+    iosHint: '在 iPhone 或 iPad 上，请用 Safari 安装：',
+    iosStep1: '点分享按钮',
+    iosStep2: '向下滑动，点“添加到主屏幕”',
+    iosStep3: '点添加，然后从主屏幕打开 Cipher Boy',
+    manualBody: '请使用浏览器菜单：安装应用 / 添加到主屏幕。',
+    blockedBody: '应用内浏览器无法可靠安装。请用 Chrome、Safari 或 Firefox 打开此链接，再点安装。',
+  },
 }
 
 const ja: Translations = {
@@ -693,7 +735,7 @@ const ja: Translations = {
     open: '開く',
     deletePage: 'ページを削除',
     deletePageDesc: 'このページと暗号化されたデータが完全に削除されます。この操作は元に戻せません。',
-    exportVault: 'Cipher Boy のバックアップをエクスポート',
+    exportVault: 'データをバックアップ',
     importMerge: 'バックアップをインポート・統合',
     resetVault: 'Cipher Boy をリセット（全データ削除）',
     dataWarning: {
@@ -755,9 +797,9 @@ const ja: Translations = {
     pagesWord: '件の暗号化ページ',
     backupTitle: '削除前にバックアップ',
     backupDesc: 'まず Cipher Boy を安全な場所にエクスポートしてください。外部ドライブ、クラウド、パスワードマネージャーなど。後でインポートで復元できます。',
-    exportNow: '今すぐ Cipher Boy バックアップをエクスポート',
+    exportNow: '今すぐデータをバックアップ',
     exporting: 'エクスポート中...',
-    exportAgain: '再度エクスポート',
+    exportAgain: '再度バックアップ',
     backupSuccess: 'バックアップのダウンロードが完了しました。安全な場所に保管してください。',
     confirmCheckbox: 'データを安全な場所にエクスポートした、またはすべてのデータが永久に失われることを理解しています。',
     deleting: '削除中...',
@@ -786,7 +828,7 @@ const ja: Translations = {
       },
       {
         title: '5. データをバックアップ',
-        body: '設定 → Cipher Boy のバックアップをエクスポートでJSONファイルをダウンロードし、後で使える安全な場所に保存してください。ファイルは完全に暗号化されており、クラウドや外付けドライブに保存しても安全です。インポートで別デバイスに復元できます。',
+        body: '設定 → データをバックアップでJSONファイルをダウンロードし、後で使える安全な場所に保存してください。ファイルは完全に暗号化されており、クラウドや外付けドライブに保存しても安全です。インポートで別デバイスに復元できます。',
       },
       {
         title: '6. テーブルのヒント',
@@ -858,6 +900,20 @@ const ja: Translations = {
       recommend: 'Chrome、Safari、Firefox、Edge など信頼性の高いブラウザを使い、アプリ内・埋め込みブラウザは避けてください。',
     },
   },
+  installApp: {
+    title: 'Cipher Boy をインストール',
+    subtitle: 'ホーム画面に追加すると、素早く開けてローカル保存も安定します。',
+    installButton: 'アプリをインストール',
+    shortLabel: 'インストール',
+    notNow: '後で',
+    alreadyInstalled: 'Cipher Boy はこのデバイスにインストール済みです。',
+    iosHint: 'iPhone / iPad では Safari からインストール：',
+    iosStep1: '共有ボタンをタップ',
+    iosStep2: '「ホーム画面に追加」を選ぶ',
+    iosStep3: '追加をタップし、ホーム画面から Cipher Boy を開く',
+    manualBody: 'ブラウザメニューから「アプリをインストール」または「ホーム画面に追加」を選んでください。',
+    blockedBody: 'アプリ内ブラウザではインストールできません。Chrome、Safari、Firefox で開き、インストールをタップしてください。',
+  },
 }
 
 const ko: Translations = {
@@ -908,7 +964,7 @@ const ko: Translations = {
     open: '열기',
     deletePage: '페이지 삭제',
     deletePageDesc: '이 페이지와 암호화된 데이터가 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.',
-    exportVault: 'Cipher Boy 백업보내기',
+    exportVault: '데이터 백업',
     importMerge: '백업 가져오기 및 병합',
     resetVault: 'Cipher Boy 초기화 (모든 데이터 삭제)',
     dataWarning: {
@@ -970,9 +1026,9 @@ const ko: Translations = {
     pagesWord: '개의 암호화된 페이지',
     backupTitle: '삭제 전 백업',
     backupDesc: '먼저 Cipher Boy를 안전한 곳에보내세요 — 외장 드라이브, 클라우드 또는 비밀번호 관리자. 나중에 가져오기로 복원할 수 있습니다.',
-    exportNow: '지금 Cipher Boy 백업보내기',
+    exportNow: '지금 데이터 백업',
     exporting: '보내는 중...',
-    exportAgain: '다시보내기',
+    exportAgain: '다시 백업',
     backupSuccess: '백업이 성공적으로 다운로드되었습니다. 안전한 곳에 보관하세요.',
     confirmCheckbox: '데이터를 안전한 곳에보냈거나, 모든 Cipher Boy 데이터가 영구적으로 손실됨을 이해합니다.',
     deleting: '삭제 중...',
@@ -1001,7 +1057,7 @@ const ko: Translations = {
       },
       {
         title: '5. 데이터 백업',
-        body: '설정 → Cipher Boy 백업보내기에서 JSON 파일을 다운로드하고 나중에 사용할 수 있는 안전한 곳에 저장하세요. 파일은 완전히 암호화되어 클라우드나 외장 드라이브에 저장해도 안전합니다. 가져오기로 다른 기기에서 복원할 수 있습니다.',
+        body: '설정 → 데이터 백업에서 JSON 파일을 다운로드하고 나중에 사용할 수 있는 안전한 곳에 저장하세요. 파일은 완전히 암호화되어 클라우드나 외장 드라이브에 저장해도 안전합니다. 가져오기로 다른 기기에서 복원할 수 있습니다.',
       },
       {
         title: '6. 표 사용 팁',
@@ -1072,6 +1128,20 @@ const ko: Translations = {
       body: '현재 브라우저({browser})는 로컬 데이터를 안정적으로 유지하지 못할 수 있습니다. Cipher Boy는 이 브라우저에만 데이터를 저장합니다.',
       recommend: 'Chrome, Safari, Firefox, Edge 등 잘 알려진 브라우저를 사용하고, 인앱/임베디드 브라우저는 피하세요.',
     },
+  },
+  installApp: {
+    title: 'Cipher Boy 설치',
+    subtitle: '홈 화면에 추가하면 더 빠르게 열고 로컬 저장도 더 안정적입니다.',
+    installButton: '앱 설치',
+    shortLabel: '설치',
+    notNow: '나중에',
+    alreadyInstalled: 'Cipher Boy가 이 기기에 설치되어 있습니다.',
+    iosHint: 'iPhone 또는 iPad에서는 Safari에서 설치하세요:',
+    iosStep1: '공유 버튼을 탭하세요',
+    iosStep2: '“홈 화면에 추가”를 선택하세요',
+    iosStep3: '추가를 누른 뒤 홈 화면에서 Cipher Boy를 여세요',
+    manualBody: '브라우저 메뉴에서 앱 설치 / 홈 화면에 추가를 선택하세요.',
+    blockedBody: '인앱 브라우저에서는 안정적으로 설치할 수 없습니다. Chrome, Safari 또는 Firefox에서 연 뒤 설치를 누르세요.',
   },
 }
 
