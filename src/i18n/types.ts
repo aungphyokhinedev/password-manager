@@ -175,12 +175,12 @@ export interface Translations {
     shortLabel: string
     notNow: string
     alreadyInstalled: string
-    iosHint: string
-    iosStep1: string
-    iosStep2: string
-    iosStep3: string
-    manualBody: string
+    howToTitle: string
     blockedBody: string
+    ios: { hint: string; steps: [string, string, string] }
+    android: { hint: string; steps: [string, string, string] }
+    desktop: { hint: string; steps: [string, string, string] }
+    firefox: { hint: string; steps: [string, string, string] }
   }
 }
 

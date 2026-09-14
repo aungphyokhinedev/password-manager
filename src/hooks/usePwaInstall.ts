@@ -8,7 +8,15 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
 }
 
-export type InstallPlatform = 'chromium' | 'ios' | 'manual' | 'installed' | 'blocked'
+/** Which install guide / flow to show the user */
+export type InstallGuide =
+  | 'installed'
+  | 'blocked'
+  | 'oneTap'
+  | 'ios'
+  | 'android'
+  | 'desktop'
+  | 'firefox'
 
 function isStandaloneDisplay(): boolean {
   if (typeof window === 'undefined') return false
@@ -20,11 +28,28 @@ function isStandaloneDisplay(): boolean {
   )
 }
 
+function isIosDevice(ua: string): boolean {
+  return /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && typeof document !== 'undefined' && 'ontouchend' in document)
+}
+
 function isIosSafari(ua: string): boolean {
-  const iOS = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && 'ontouchend' in document)
-  const webkit = /WebKit/i.test(ua)
-  const notOther = !/CriOS|FxiOS|EdgiOS|OPiOS|Chrome|Android/i.test(ua)
-  return iOS && webkit && notOther
+  if (!isIosDevice(ua)) return false
+  // Chrome/Firefox/Edge on iOS are not Safari — they can't add PWAs the same way
+  if (/CriOS|FxiOS|EdgiOS|OPiOS/i.test(ua)) return false
+  return /Safari/i.test(ua) || /WebKit/i.test(ua)
+}
+
+function isAndroid(ua: string): boolean {
+  return /Android/i.test(ua)
+}
+
+function isFirefox(ua: string): boolean {
+  return /Firefox|FxiOS/i.test(ua)
+}
+
+function isChromiumDesktop(ua: string): boolean {
+  if (isAndroid(ua) || isIosDevice(ua)) return false
+  return /Chrome|Edg\/|OPR\/|Chromium/i.test(ua) && !/Firefox/i.test(ua)
 }
 
 export function usePwaInstall() {
@@ -39,17 +64,26 @@ export function usePwaInstall() {
   })
   const [installing, setInstalling] = useState(false)
 
-  const platform: InstallPlatform = (() => {
+  const guide: InstallGuide = (() => {
     if (installed) return 'installed'
-    if (typeof navigator === 'undefined') return 'manual'
+    if (typeof navigator === 'undefined') return 'desktop'
     if (detectBrowserRisk() === 'in_app') return 'blocked'
+
     const ua = navigator.userAgent
+
+    // Native install prompt available (Chrome/Edge/Android Chrome)
+    if (deferredPrompt) return 'oneTap'
+
     if (isIosSafari(ua)) return 'ios'
-    if (deferredPrompt) return 'chromium'
-    return 'manual'
+    if (isIosDevice(ua)) return 'ios' // other iOS browsers: still show Safari-oriented guidance
+    if (isFirefox(ua)) return 'firefox'
+    if (isAndroid(ua)) return 'android'
+    if (isChromiumDesktop(ua)) return 'desktop'
+    return 'desktop'
   })()
 
-  const canShowPrompt = !installed && !dismissed && platform !== 'installed'
+  const canShowPrompt = !installed && !dismissed && guide !== 'installed'
+  const canOneTapInstall = guide === 'oneTap' && !!deferredPrompt
 
   useEffect(() => {
     function onBeforeInstall(e: Event) {
@@ -107,9 +141,11 @@ export function usePwaInstall() {
   }, [])
 
   return {
-    platform,
+    guide,
+    /** @deprecated use guide */
+    platform: guide === 'oneTap' ? 'chromium' : guide,
     canShowPrompt,
-    canOneTapInstall: platform === 'chromium' && !!deferredPrompt,
+    canOneTapInstall,
     installing,
     installed,
     install,

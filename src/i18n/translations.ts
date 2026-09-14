@@ -220,12 +220,40 @@ const en: Translations = {
     shortLabel: 'Install',
     notNow: 'Not now',
     alreadyInstalled: 'Cipher Boy is installed on this device.',
-    iosHint: 'On iPhone or iPad, install from Safari:',
-    iosStep1: 'Tap the Share button',
-    iosStep2: 'Scroll and tap “Add to Home Screen”',
-    iosStep3: 'Tap Add — then open Cipher Boy from your home screen',
-    manualBody: 'Use your browser menu: Install app / Add to Home Screen / Add to Dock.',
-    blockedBody: 'In-app browsers cannot install apps reliably. Open this link in Chrome, Safari, or Firefox, then tap Install.',
+    howToTitle: 'How to install',
+    blockedBody: 'This in-app browser cannot install apps. Open the link in Chrome, Safari, or Firefox, then install from there.',
+    ios: {
+      hint: 'On iPhone or iPad, use Safari (not Chrome or in-app browsers):',
+      steps: [
+        'Tap the Share button (square with an arrow) at the bottom of Safari',
+        'Scroll down and tap “Add to Home Screen”',
+        'Tap “Add” — then open Cipher Boy from your Home Screen',
+      ],
+    },
+    android: {
+      hint: 'In Chrome on Android:',
+      steps: [
+        'Tap the ⋮ menu in the top-right corner',
+        'Tap “Install app” or “Add to Home screen”',
+        'Tap “Install” to confirm',
+      ],
+    },
+    desktop: {
+      hint: 'In Chrome or Edge on desktop:',
+      steps: [
+        'Look for the install icon in the address bar (computer with a download arrow)',
+        'Or open the browser menu (⋮) and choose “Install Cipher Boy” / “Install app”',
+        'Confirm Install — Cipher Boy opens in its own window',
+      ],
+    },
+    firefox: {
+      hint: 'In Firefox:',
+      steps: [
+        'Tap or click the browser menu (⋮)',
+        'Choose “Install” or “Add to Home Screen” if shown',
+        'For the best experience, use Chrome, Edge, or Safari instead',
+      ],
+    },
   },
 }
 
@@ -449,12 +477,40 @@ const my: Translations = {
     shortLabel: 'ထည့်မည်',
     notNow: 'နောက်မှ',
     alreadyInstalled: 'Cipher Boy ကို ဤကိရိယာတွင် ထည့်ပြီးသားဖြစ်သည်။',
-    iosHint: 'iPhone သို့မဟုတ် iPad တွင် Safari မှ ထည့်သွင်းပါ:',
-    iosStep1: 'Share ခလုတ်ကို နှိပ်ပါ',
-    iosStep2: '“Add to Home Screen” ကို ရွေးပါ',
-    iosStep3: 'Add နှိပ်ပြီး home screen မှ Cipher Boy ကို ဖွင့်ပါ',
-    manualBody: 'Browser မီနူးမှ Install app / Add to Home Screen ကို ရွေးပါ။',
-    blockedBody: 'In-app browser တွင် app ထည့်ရန် မတည်ငြိမ်ပါ။ Chrome, Safari သို့မဟုတ် Firefox တွင် ဖွင့်ပြီး Install နှိပ်ပါ။',
+    howToTitle: 'ထည့်သွင်းနည်း',
+    blockedBody: 'ဤ in-app browser တွင် app ထည့်၍ မရပါ။ Chrome, Safari သို့မဟုတ် Firefox တွင် ဖွင့်ပြီး ထည့်သွင်းပါ။',
+    ios: {
+      hint: 'iPhone / iPad တွင် Safari သုံးပါ (Chrome သို့မဟုတ် in-app browser မဟုတ်):',
+      steps: [
+        'Safari အောက်ခြေရှိ Share ခလုတ် (မြှားပါ စတုရန်း) ကို နှိပ်ပါ',
+        'အောက်သို့ ဆွဲပြီး “Add to Home Screen” ကို ရွေးပါ',
+        '“Add” နှိပ်ပြီး Home Screen မှ Cipher Boy ကို ဖွင့်ပါ',
+      ],
+    },
+    android: {
+      hint: 'Android ရှိ Chrome တွင်:',
+      steps: [
+        'ညာဘက်အပေါ် ⋮ မီနူးကို နှိပ်ပါ',
+        '“Install app” သို့မဟုတ် “Add to Home screen” ကို ရွေးပါ',
+        '“Install” နှိပ်၍ အတည်ပြုပါ',
+      ],
+    },
+    desktop: {
+      hint: 'Desktop Chrome သို့မဟုတ် Edge တွင်:',
+      steps: [
+        'လိပ်စာဘားရှိ install အိုင်ကွန်ကို ရှာပါ',
+        'သို့မဟုတ် browser မီနူး (⋮) မှ “Install app” ကို ရွေးပါ',
+        'Install အတည်ပြုပါ — Cipher Boy သည် သီးခြား window ဖြင့် ဖွင့်မည်',
+      ],
+    },
+    firefox: {
+      hint: 'Firefox တွင်:',
+      steps: [
+        'Browser မီနူး (⋮) ကို ဖွင့်ပါ',
+        '“Install” သို့မဟုတ် “Add to Home Screen” ရှိလျှင် ရွေးပါ',
+        'အကောင်းဆုံးအတွက် Chrome, Edge သို့မဟုတ် Safari သုံးပါ',
+      ],
+    },
   },
 }
 
@@ -678,12 +734,40 @@ const zh: Translations = {
     shortLabel: '安装',
     notNow: '暂不',
     alreadyInstalled: 'Cipher Boy 已安装在此设备上。',
-    iosHint: '在 iPhone 或 iPad 上，请用 Safari 安装：',
-    iosStep1: '点分享按钮',
-    iosStep2: '向下滑动，点“添加到主屏幕”',
-    iosStep3: '点添加，然后从主屏幕打开 Cipher Boy',
-    manualBody: '请使用浏览器菜单：安装应用 / 添加到主屏幕。',
-    blockedBody: '应用内浏览器无法可靠安装。请用 Chrome、Safari 或 Firefox 打开此链接，再点安装。',
+    howToTitle: '安装方法',
+    blockedBody: '当前应用内浏览器无法安装应用。请用 Chrome、Safari 或 Firefox 打开此链接后再安装。',
+    ios: {
+      hint: '在 iPhone 或 iPad 上请使用 Safari（不要用 Chrome 或应用内浏览器）：',
+      steps: [
+        '点 Safari 底部的分享按钮（方框带向上箭头）',
+        '向下滑动，点“添加到主屏幕”',
+        '点“添加”，然后从主屏幕打开 Cipher Boy',
+      ],
+    },
+    android: {
+      hint: '在 Android 的 Chrome 中：',
+      steps: [
+        '点右上角 ⋮ 菜单',
+        '点“安装应用”或“添加到主屏幕”',
+        '点“安装”确认',
+      ],
+    },
+    desktop: {
+      hint: '在桌面版 Chrome 或 Edge 中：',
+      steps: [
+        '查看地址栏中的安装图标（电脑+下载箭头）',
+        '或打开浏览器菜单（⋮），选择“安装 Cipher Boy / 安装应用”',
+        '确认安装 — Cipher Boy 会在独立窗口中打开',
+      ],
+    },
+    firefox: {
+      hint: '在 Firefox 中：',
+      steps: [
+        '打开浏览器菜单（⋮）',
+        '如有“安装”或“添加到主屏幕”，请选择',
+        '为获得最佳体验，建议改用 Chrome、Edge 或 Safari',
+      ],
+    },
   },
 }
 
@@ -907,12 +991,40 @@ const ja: Translations = {
     shortLabel: 'インストール',
     notNow: '後で',
     alreadyInstalled: 'Cipher Boy はこのデバイスにインストール済みです。',
-    iosHint: 'iPhone / iPad では Safari からインストール：',
-    iosStep1: '共有ボタンをタップ',
-    iosStep2: '「ホーム画面に追加」を選ぶ',
-    iosStep3: '追加をタップし、ホーム画面から Cipher Boy を開く',
-    manualBody: 'ブラウザメニューから「アプリをインストール」または「ホーム画面に追加」を選んでください。',
-    blockedBody: 'アプリ内ブラウザではインストールできません。Chrome、Safari、Firefox で開き、インストールをタップしてください。',
+    howToTitle: 'インストール方法',
+    blockedBody: 'アプリ内ブラウザではインストールできません。Chrome、Safari、Firefox で開いてからインストールしてください。',
+    ios: {
+      hint: 'iPhone / iPad では Safari を使ってください（Chrome やアプリ内ブラウザは不可）：',
+      steps: [
+        'Safari 下部の共有ボタン（四角と上矢印）をタップ',
+        '下にスクロールして「ホーム画面に追加」をタップ',
+        '「追加」をタップし、ホーム画面から Cipher Boy を開く',
+      ],
+    },
+    android: {
+      hint: 'Android の Chrome で：',
+      steps: [
+        '右上の ⋮ メニューをタップ',
+        '「アプリをインストール」または「ホーム画面に追加」をタップ',
+        '「インストール」で確定',
+      ],
+    },
+    desktop: {
+      hint: 'デスクトップの Chrome または Edge で：',
+      steps: [
+        'アドレスバーのインストールアイコンを探す',
+        'またはブラウザメニュー（⋮）から「アプリをインストール」を選ぶ',
+        'インストールを確定 — 専用ウィンドウで開きます',
+      ],
+    },
+    firefox: {
+      hint: 'Firefox で：',
+      steps: [
+        'ブラウザメニュー（⋮）を開く',
+        '「インストール」または「ホーム画面に追加」があれば選ぶ',
+        'より快適に使うには Chrome、Edge、Safari をおすすめします',
+      ],
+    },
   },
 }
 
@@ -1136,12 +1248,40 @@ const ko: Translations = {
     shortLabel: '설치',
     notNow: '나중에',
     alreadyInstalled: 'Cipher Boy가 이 기기에 설치되어 있습니다.',
-    iosHint: 'iPhone 또는 iPad에서는 Safari에서 설치하세요:',
-    iosStep1: '공유 버튼을 탭하세요',
-    iosStep2: '“홈 화면에 추가”를 선택하세요',
-    iosStep3: '추가를 누른 뒤 홈 화면에서 Cipher Boy를 여세요',
-    manualBody: '브라우저 메뉴에서 앱 설치 / 홈 화면에 추가를 선택하세요.',
-    blockedBody: '인앱 브라우저에서는 안정적으로 설치할 수 없습니다. Chrome, Safari 또는 Firefox에서 연 뒤 설치를 누르세요.',
+    howToTitle: '설치 방법',
+    blockedBody: '인앱 브라우저에서는 앱을 설치할 수 없습니다. Chrome, Safari 또는 Firefox에서 연 뒤 설치하세요.',
+    ios: {
+      hint: 'iPhone / iPad에서는 Safari를 사용하세요 (Chrome·인앱 브라우저 불가):',
+      steps: [
+        'Safari 하단의 공유 버튼(사각형+위쪽 화살표)을 탭하세요',
+        '아래로 스크롤한 뒤 “홈 화면에 추가”를 탭하세요',
+        '“추가”를 누른 뒤 홈 화면에서 Cipher Boy를 여세요',
+      ],
+    },
+    android: {
+      hint: 'Android Chrome에서:',
+      steps: [
+        '오른쪽 위 ⋮ 메뉴를 탭하세요',
+        '“앱 설치” 또는 “홈 화면에 추가”를 탭하세요',
+        '“설치”를 눌러 확인하세요',
+      ],
+    },
+    desktop: {
+      hint: '데스크톱 Chrome 또는 Edge에서:',
+      steps: [
+        '주소 표시줄의 설치 아이콘을 찾으세요',
+        '또는 브라우저 메뉴(⋮)에서 “앱 설치”를 선택하세요',
+        '설치를 확인하면 Cipher Boy가 별도 창으로 열립니다',
+      ],
+    },
+    firefox: {
+      hint: 'Firefox에서:',
+      steps: [
+        '브라우저 메뉴(⋮)를 여세요',
+        '“설치” 또는 “홈 화면에 추가”가 있으면 선택하세요',
+        '더 나은 경험을 위해 Chrome, Edge 또는 Safari를 권장합니다',
+      ],
+    },
   },
 }
 
